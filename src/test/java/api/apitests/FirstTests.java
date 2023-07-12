@@ -1,9 +1,8 @@
-package tests;
+package api.apitests;
 
 import org.testng.annotations.Test;
-import utils.ApiUtils;
+import api.utils.ApiUtils;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class FirstTests {
