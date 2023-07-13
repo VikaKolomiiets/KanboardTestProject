@@ -9,6 +9,7 @@ public class DashboardPage {
     private SelenideElement pageTitle = $(".title-container");
 
     public String getTitleContainerName(){
+
         return pageTitle.shouldBe(Condition.visible).getText();
     }
 }
