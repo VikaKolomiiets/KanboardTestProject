@@ -18,7 +18,7 @@ import static io.restassured.RestAssured.given;
 
 public class ApiUtils {
 
-    //private static final String BASE_URL = "http://127.0.0.1/kanboard/";
+    //private static final String BASE_URL = "http://127.0.0.1/jsonrpc.php";
     private static final String BASE_URL = "http://127.0.0.1/";
 
     public static Map<String, String> getCookie(String url) {
@@ -72,8 +72,8 @@ public class ApiUtils {
                 basic("admin", "admin").
                 header("Content-Type", "application/json").
                 //header("Cookie", "KB_SID=sufseo930noe2qbr1smedqumpe").
-                and().
-                body("{\"jsonrpc\": \"2.0\", \"method\": \"getMyProjects\", \"id\": 1}").
+
+                body("{\"jsonrpc\": \"2.0\", \"method\": \"getMyProjects\", \"id\": 1}").  //from Documentation
                 post("http://localhost:80/jsonrpc.php");
         // postRequest.prettyPrint();
         String s = postRequest.asString();
@@ -82,7 +82,7 @@ public class ApiUtils {
 
     public static void main(String[] args) {
         //Map<String, String> temp = ApiUtils.getCookie(BASE_URL);
-        String temp =getToken();
+        String temp = getToken();
         System.out.println(temp);
 
     }

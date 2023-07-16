@@ -1,5 +1,6 @@
 package ui.uitests;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import org.testng.Assert;
@@ -34,10 +35,12 @@ public class LoginPageTests {
                 dashboardPage.getTitleContainerName(),
                 "DashboardPage is not visible");
     }
+
     @Description("Negative")
     @Test
     public void testAfterClickButtonWithoutAnyDataInput(){
         LoginPage loginPage = new LoginPage().clickOnSubmitButton();
+
         Assert.assertTrue(
                 loginPage.isExistOnLoginPage(),
                 "Login page doesn't exist after clicking button without fill in data");
