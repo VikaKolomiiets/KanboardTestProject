@@ -1,11 +1,9 @@
-package api.apitests;
+package api.tests;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import lombok.Builder;
-import lombok.Getter;
 import org.testng.annotations.Test;
-import api.utils.ApiUtils;
+import api.utilsold.ApiUtils;
 
 import java.util.Map;
 

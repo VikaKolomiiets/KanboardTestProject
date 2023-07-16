@@ -1,4 +1,4 @@
-package api.utils;
+package api.utilsold;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -7,10 +7,6 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.jsoup.Jsoup;
 
-import java.io.UnsupportedEncodingException;
-import java.net.http.HttpHeaders;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
