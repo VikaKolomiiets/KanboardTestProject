@@ -1,4 +1,4 @@
-package api.utilsold;
+package api.utils;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 
 public class ApiUtils {
 
-    //private static final String BASE_URL = "http://127.0.0.1/jsonrpc.php";
+    //private static final String API_URL = "http://127.0.0.1/jsonrpc.php";
     private static final String BASE_URL = "http://127.0.0.1/";
 
     public static Map<String, String> getCookie(String url) {

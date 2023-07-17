@@ -3,7 +3,7 @@ package api.tests;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import api.utilsold.ApiUtils;
+import api.utils.ApiUtils;
 
 import java.util.Map;
 
