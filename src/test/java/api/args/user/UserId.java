@@ -6,9 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserId {
-    private Integer id;
+    private Integer user_id;
 }

@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateUser extends UserId {
+public class UpdateUser {
+    private Integer id;
     private String username;
     private String name;
     private String email;

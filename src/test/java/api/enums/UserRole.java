@@ -1,5 +1,7 @@
 package api.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public enum UserRole {
     APP_ADMIN("app-admin"),
     APP_MANAGER("app-manager"),

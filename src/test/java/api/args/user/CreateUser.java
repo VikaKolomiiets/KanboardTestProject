@@ -13,5 +13,5 @@ public class CreateUser {
     private String password;
     private String name;
     private String email;
-    private UserRole role;
+    private String role;
 }

@@ -44,4 +44,8 @@ public class LoginPage {
         forgotPassword.shouldBe(Condition.visible).click();
         return passwordReset.shouldBe(Condition.visible).exists();
     }
+    public LoginPage openLoginPage() {
+        open("");
+        return new LoginPage();
+    }
 }
