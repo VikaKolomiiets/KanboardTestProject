@@ -1,6 +1,7 @@
-package api.tests;
+package api.tests.login;
 
 import api.steps.UserApiSteps;
+import api.tests.BaseTest;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
 
-public class LoginTests extends BaseTest  {
+public class LoginTests extends BaseTest {
     private static final String USERNAME = "Kate";
     private static final String PASSWORD = "myPass";
 

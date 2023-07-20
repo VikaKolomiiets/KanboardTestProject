@@ -22,6 +22,7 @@ public class DashboardPage {
     private SelenideElement checkBoxFormProject = $x("//*[contains(@name, 'swimlane')]");
     private SelenideElement buttonSubmitFormProject  = $x("//button[@type='submit']");
     private SelenideElement cancelRefFormProject = $x("//a[text()='cancel']");
+    private SelenideElement errorProjectForm = $(".form-errors");
 
     public SelenideElement getLogoutRef() {
         List<SelenideElement> logoutList = $$("a[href='/logout']");
@@ -51,6 +52,9 @@ public class DashboardPage {
     }
     public void clickCancelInNewProjectForm(){
         cancelRefFormProject.shouldBe(Condition.visible).click();
+    }
+    public String getErrorProjectFormText(){
+        return errorProjectForm.shouldBe(Condition.visible).getText();
     }
 
 }

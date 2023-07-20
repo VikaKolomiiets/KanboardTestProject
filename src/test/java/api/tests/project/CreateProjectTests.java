@@ -12,16 +12,18 @@ import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
 
-public class ProjectCreateTests extends BaseTest {
+public class CreateProjectTests extends BaseTest {
     private static final String USERNAME = "Bossy";
     private static final String PASSWORD = "my_Pass";
     private static final String PROJECT_NAME ="Main project";
     private static final String IDENTIFIER = "PR20011";
     private static final Integer TASK_LIMIT = 5;
+    private static final String ERROR_TEXT = "The project name is required";
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();
     private UserApiSteps userApiSteps = new UserApiSteps();
     private DashboardPage dashboardPage;
     private String userId;
+    private String actualTitle;
 
     @BeforeMethod
     public void setUpMethod(){
@@ -41,7 +43,7 @@ public class ProjectCreateTests extends BaseTest {
         this.dashboardPage.openNewProjectForm()
                 .fillInNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
                 .clickSaveButtonNewProjectForm();
-        String actualTitle = this.dashboardPage.getTitle().getText();
+        actualTitle = this.dashboardPage.getTitle().getText();
 
         Assert.assertTrue(actualTitle.contains(PROJECT_NAME),
                 "Title does not contain project name.");
@@ -49,10 +51,37 @@ public class ProjectCreateTests extends BaseTest {
                 "Title does not contain Task limit number.");
     }
 
+    @Description("Negative")
+    @Test
+    public void testCreateCancelNewProject(){
+        this.dashboardPage.openNewProjectForm()
+                .fillInNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
+                .clickCancelInNewProjectForm();
+        actualTitle = this.dashboardPage.getTitle().getText();
+
+        Assert.assertFalse(actualTitle.contains(PROJECT_NAME),
+                "Title does not contain project name.");
+        Assert.assertFalse(actualTitle.contains(TASK_LIMIT.toString()),
+                "Title does not contain Task limit number.");
+    }
+
+    @Description("Negative")
+    @Test
+    public void testCreateNewProjectWithOutNameInput(){
+        this.dashboardPage.openNewProjectForm()
+                .clickSaveButtonNewProjectForm();
+        actualTitle = this.dashboardPage.getTitle().getText();
+        String actualErrorMessage = this.dashboardPage.getErrorProjectFormText();
+        Assert.assertTrue(actualErrorMessage != null, "Message does not exist.");
+        Assert.assertEquals(actualErrorMessage, ERROR_TEXT, "Message is not correct.");
+    }
+
     @AfterMethod
     public void tearDownMethod(){
-        String projectId = projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
-        boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId),USERNAME, PASSWORD);
+        if(actualTitle.contains(PROJECT_NAME)){
+            String projectId = projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
+            boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId),USERNAME, PASSWORD);
+        }
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
     }
 }
