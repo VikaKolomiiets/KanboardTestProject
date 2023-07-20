@@ -11,7 +11,6 @@ import io.restassured.response.Response;
 import static api.utils.EnvProperties.API_TOKEN;
 import static api.utils.EnvProperties.API_USERNAME;
 
-
 public class UserApiSteps extends BaseApiSteps{
 
     public String createUser(String userName, String userPassword){
