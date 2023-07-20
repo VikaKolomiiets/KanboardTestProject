@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResponseProjectUrl {
     private String board;
-    private String calendar;
+    //private String calendar;
     private String list;
 }

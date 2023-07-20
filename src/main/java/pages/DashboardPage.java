@@ -20,7 +20,7 @@ public class DashboardPage {
     private SelenideElement inputIdentifierFormProject = $("#form-identifier");
     private SelenideElement inputTaskLimitFormProject = $("#form-task_limit");
     private SelenideElement checkBoxFormProject = $x("//*[contains(@name, 'swimlane')]");
-    private SelenideElement buttonSubmitFormProject  = $("//button[@type='submit']");
+    private SelenideElement buttonSubmitFormProject  = $x("//button[@type='submit']");
     private SelenideElement cancelRefFormProject = $x("//a[text()='cancel']");
 
     public SelenideElement getLogoutRef() {
@@ -47,7 +47,7 @@ public class DashboardPage {
         return this;
     }
     public void clickSaveButtonNewProjectForm(){
-        buttonSubmitFormProject.shouldBe(Condition.visible).click();
+        buttonSubmitFormProject.should(Condition.visible).click();
     }
     public void clickCancelInNewProjectForm(){
         cancelRefFormProject.shouldBe(Condition.visible).click();

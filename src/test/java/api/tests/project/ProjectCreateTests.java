@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
 
-public class ProjectTests extends BaseTest {
+public class ProjectCreateTests extends BaseTest {
     private static final String USERNAME = "Bossy";
     private static final String PASSWORD = "my_Pass";
     private static final String PROJECT_NAME ="Main project";
