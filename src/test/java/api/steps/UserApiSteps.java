@@ -42,5 +42,4 @@ public class UserApiSteps extends BaseApiSteps{
         Response response = restAssurePost("admin", "admin", bodyArgs);
         return (boolean) response.as(Results.class).getResult();
     }
-
 }

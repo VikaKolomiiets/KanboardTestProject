@@ -11,7 +11,7 @@ import pages.DashboardPage;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTest  {
-    private static final String USERNAME = "Kate8";
+    private static final String USERNAME = "Kate";
     private static final String PASSWORD = "myPass";
 
     UserApiSteps userApiSteps = new UserApiSteps();
@@ -37,7 +37,7 @@ public class LoginTests extends BaseTest  {
     }
     @Description("Positive")
     @Test
-    public void testLoginLogOutByNewUser() {
+    public void testLoginByNewUserAndLogOut() {
         DashboardPage dashboardPage = new LoginPage()
                 .openLoginPage()
                 .setUserNameInput(USERNAME)
@@ -47,7 +47,7 @@ public class LoginTests extends BaseTest  {
         String expectedPageTitleName = "KB Dashboard for " + USERNAME.substring(0, 4);
         Assert.assertEquals(actualPageTitleName, expectedPageTitleName, "New user cannot open DashBoard");
         boolean isOnLoginPage = dashboardPage.logOutFromDashboardPage().isExistOnLoginPage();
-        Assert.assertTrue(isOnLoginPage, "User can't log out from DashboardPage.");
+        Assert.assertTrue(isOnLoginPage, "User can not log out from DashboardPage.");
 
     }
 
@@ -86,6 +86,7 @@ public class LoginTests extends BaseTest  {
 
     @AfterMethod(alwaysRun = true)
     public void removeUserAfterTest() {
+
         userApiSteps.removeUser(Integer.valueOf(userId));
     }
 }

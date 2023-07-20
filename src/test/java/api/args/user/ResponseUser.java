@@ -12,7 +12,7 @@ import java.util.TimeZone;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ResultUser {
+public class ResponseUser {
     private Integer id;
     private String username;
     private String password;

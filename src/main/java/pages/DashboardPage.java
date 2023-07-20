@@ -4,16 +4,22 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import java.util.List;
+
+import static com.codeborne.selenide.Selenide.*;
 
 @Getter
 public class DashboardPage {
     private SelenideElement pageTitle = $(".title-container");
 
     private SelenideElement title = $(".title");
-    private SelenideElement avatarDropDown = $x("//div[@class='avatar avatar-20 avatar-inline']");
-    private SelenideElement logoutRef = $x("//a[@href='/logout']");
+    private SelenideElement avatarDropDown = $(".avatar-letter");
+
+    public SelenideElement getLogoutRef() {
+        List<SelenideElement> logoutList = $$("a[href='/logout']");
+        return logoutList.get(1);
+    }
+
 
 
     public String getTitleContainerName(){
@@ -22,7 +28,7 @@ public class DashboardPage {
 
     public LoginPage logOutFromDashboardPage(){
         avatarDropDown.shouldBe(Condition.visible).click();
-        logoutRef.shouldBe(Condition.visible).click();
+        getLogoutRef().shouldBe(Condition.visible).click();
         return new LoginPage();
     }
 }
