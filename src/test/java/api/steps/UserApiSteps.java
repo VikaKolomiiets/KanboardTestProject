@@ -26,7 +26,7 @@ public class UserApiSteps extends BaseApiSteps{
                 .method(UserMethod.CREATE.getName())
                 .params(body)
                 .build();
-        Response response = restAssurePost(BASIC_AUTH_INPUT, BASIC_AUTH_INPUT, bodyArgs);
+        Response response = restAssurePost("admin", "admin", bodyArgs);
         response.then().statusCode(200);
         Results result = response.as(Results.class);
         return result.getResult().toString();
@@ -39,7 +39,7 @@ public class UserApiSteps extends BaseApiSteps{
                 .method(UserMethod.REMOVE.getName())
                 .params(body)
                 .build();
-        Response response = restAssurePost(BASIC_AUTH_INPUT, BASIC_AUTH_INPUT, bodyArgs);
+        Response response = restAssurePost("admin", "admin", bodyArgs);
         return (boolean) response.as(Results.class).getResult();
     }
 

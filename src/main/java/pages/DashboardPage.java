@@ -41,7 +41,7 @@ public class DashboardPage {
         checkBoxFormProject.shouldBe(Condition.visible).click();
         return this;
     }
-    public DashboardPage openNewProjectRequestForm(){
+    public DashboardPage openNewProjectForm(){
         projectCreateRef.shouldBe(Condition.visible).click();
         requestWindowTitle.shouldBe(Condition.exactValue("New project"));
         return this;
