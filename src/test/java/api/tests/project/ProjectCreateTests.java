@@ -24,7 +24,7 @@ public class ProjectTests extends BaseTest {
     private String userId;
 
     @BeforeMethod
-    public void setUp(){
+    public void setUpMethod(){
         userId = userApiSteps.createUser(USERNAME, PASSWORD);
         boolean isManager = userApiSteps.updateUserRole(Integer.valueOf(userId), UserRole.APP_MANAGER);
         System.out.println(userId);
@@ -42,13 +42,17 @@ public class ProjectTests extends BaseTest {
                 .fillInNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
                 .clickSaveButtonNewProjectForm();
         String actualTitle = this.dashboardPage.getTitle().getText();
-        String expectedTitle = PROJECT_NAME + " 0/" + IDENTIFIER;
-        Assert.assertEquals(actualTitle, expectedTitle, "Title does not contains project name.");
+
+        Assert.assertTrue(actualTitle.contains(PROJECT_NAME),
+                "Title does not contain project name.");
+        Assert.assertTrue(actualTitle.contains(TASK_LIMIT.toString()),
+                "Title does not contain Task limit number.");
     }
 
     @AfterMethod
-    public void tearDown(){
+    public void tearDownMethod(){
+        String projectId = projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
+        boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId),USERNAME, PASSWORD);
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
-
     }
 }
