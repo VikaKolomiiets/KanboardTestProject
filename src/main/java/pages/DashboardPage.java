@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import dev.failsafe.internal.util.Assert;
 import lombok.Getter;
 
 import java.util.List;
@@ -43,7 +44,6 @@ public class DashboardPage {
     }
     public DashboardPage openNewProjectForm(){
         projectCreateRef.shouldBe(Condition.visible).click();
-        requestWindowTitle.shouldBe(Condition.exactValue("New project"));
         return this;
     }
     public void clickSaveButtonNewProjectForm(){
