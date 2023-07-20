@@ -15,5 +15,5 @@ public class UpdateUser {
     private String username;
     private String name;
     private String email;
-    private UserRole role;
+    private String role;
 }
