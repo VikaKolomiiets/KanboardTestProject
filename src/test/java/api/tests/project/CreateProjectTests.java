@@ -43,7 +43,7 @@ public class CreateProjectTests extends BaseTest {
         this.dashboardPage.openNewProjectForm()
                 .fillInNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
                 .clickSaveButtonNewProjectForm();
-        actualTitle = this.dashboardPage.getTitle().getText();
+        actualTitle = this.dashboardPage.getTitleContainerName();
 
         Assert.assertTrue(actualTitle.contains(PROJECT_NAME),
                 "Title does not contain project name.");

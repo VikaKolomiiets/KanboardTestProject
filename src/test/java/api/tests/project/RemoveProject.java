@@ -5,11 +5,14 @@ import api.steps.ProjectApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
 import io.qameta.allure.Description;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
+import pages.ProjectPage;
+import pages.ProjectsPage;
 
 public class RemoveProject extends BaseTest {
 
@@ -39,15 +42,21 @@ public class RemoveProject extends BaseTest {
         actualTitle = this.dashboardPage.getTitle().getText();
     }
 
-    @Description("Positive: Remove project by owner of this project")
+    @Description("Positive: Remove project by owner of this project.")
     @Test
     public void testRemoveProject(){
-        System.out.println("My project");
+        //System.out.println("My project");
 
-        this.dashboardPage.clickOnProjectNumberIcon(projectId)
+        ProjectPage projectPage =  this.dashboardPage.clickOnProjectNumberIcon(projectId);
+        ProjectsPage projectsPage =  projectPage.removeProjectByClickYesButton();
 
-
-
+        Assert.assertTrue(projectPage.getTitle().getText().contains(PROJECT_NAME),
+                "Project page is not opened by clicking on it's number.");
+        Assert.assertTrue(
+                projectsPage.getTitle().getText().contains("Projects"));
+        Assert.assertEquals(projectsPage.getAlert().getText(),
+                "Project removed successfully.",
+                "Alert doesn't contain information about success.");
     }
 
     @AfterMethod
@@ -59,6 +68,5 @@ public class RemoveProject extends BaseTest {
         }
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
     }
-
 
 }

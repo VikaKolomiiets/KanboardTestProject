@@ -25,7 +25,7 @@ public class DashboardPage {
     private SelenideElement errorProjectForm = $(".form-errors");
     private List<SelenideElement> hRefElements = $$("//a[@href='#']");
     private SelenideElement configure = $(".dropdown-submenu-open a[href='/project/27']");
-    private SelenideElement removeProject = $("a[href='/project/27/remove']");
+
 
     public SelenideElement getLogoutRef() {
         List<SelenideElement> logoutList = $$("a[href='/logout']");
@@ -67,18 +67,16 @@ public class DashboardPage {
         return errorProjectForm.shouldBe(Condition.visible).getText();
     }
 
-    public DashboardPage clickOnProjectNumberIcon(String projectId) {
-        hRefElements.stream()
+    public ProjectPage clickOnProjectNumberIcon(String projectId) {
+        SelenideElement temp = hRefElements.stream()
                 .filter(e -> e != null)
+                .filter(e -> e.getText()!= null)
                 .filter(e -> e.getText().contains("#" + projectId))
-                .findFirst()
-                .get()
-                .click();
+                .findFirst().get();
+        temp.shouldBe(Condition.visible).click();
         return new ProjectPage();
     }
-    public DashboardPage removeProjectByClickOnYesButton(){
 
-    }
 
 
 
