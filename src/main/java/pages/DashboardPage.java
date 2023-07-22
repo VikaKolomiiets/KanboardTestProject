@@ -2,7 +2,6 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import dev.failsafe.internal.util.Assert;
 import lombok.Getter;
 
 import java.util.List;
@@ -23,9 +22,10 @@ public class DashboardPage {
     private SelenideElement buttonSubmitFormProject = $x("//button[@type='submit']");
     private SelenideElement cancelRefFormProject = $x("//a[text()='cancel']");
     private SelenideElement errorProjectForm = $(".form-errors");
-    private List<SelenideElement> hRefElements = $$("//a[@href='#']");
-    private SelenideElement configure = $(".dropdown-submenu-open a[href='/project/27']");
-
+    public SelenideElement getProjectByNumberOnPage(String projectNumber){
+        String selector = "//*[contains(text(), '#" + projectNumber + "')]";
+        return $x(selector);
+    }
 
     public SelenideElement getLogoutRef() {
         List<SelenideElement> logoutList = $$("a[href='/logout']");
@@ -67,14 +67,11 @@ public class DashboardPage {
         return errorProjectForm.shouldBe(Condition.visible).getText();
     }
 
-    public ProjectPage clickOnProjectNumberIcon(String projectId) {
-        SelenideElement temp = hRefElements.stream()
-                .filter(e -> e != null)
-                .filter(e -> e.getText()!= null)
-                .filter(e -> e.getText().contains("#" + projectId))
-                .findFirst().get();
-        temp.shouldBe(Condition.visible).click();
-        return new ProjectPage();
+    public ProjectsPage clickOnProjectNumber(String projectNumber) {
+        this.getProjectByNumberOnPage(projectNumber)
+                .shouldBe(Condition.visible)
+                .doubleClick();
+        return new ProjectsPage();
     }
 
 
