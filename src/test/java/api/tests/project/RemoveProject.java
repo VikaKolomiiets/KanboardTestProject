@@ -26,17 +26,28 @@ public class RemoveProject extends BaseTest {
     private String projectId;
     @BeforeMethod
     public void setUpMethod(){
-        userId = userApiSteps.createUser(USERNAME, PASSWORD);
+        userId = userApiSteps.createUser(USERNAME,  PASSWORD);
         boolean isManager = userApiSteps.updateUserRole(Integer.valueOf(userId), UserRole.APP_MANAGER);
         System.out.println("UserId = " + userId);
-        projectId = projectApiSteps.createProject(PROJECT_NAME, Integer.valueOf(userId));
+        projectId = projectApiSteps.createProject(PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
         System.out.println("Project Id = " + projectId);
+        this.dashboardPage = new LoginPage()
+                .openLoginPage()
+                .setUserNameInput(USERNAME)
+                .setPasswordInput(PASSWORD)
+                .openDashBoardPageByClickOnSubmitButton();
+        actualTitle = this.dashboardPage.getTitle().getText();
     }
 
     @Description("Positive: Remove project by owner of this project")
     @Test
     public void testRemoveProject(){
-        actualTitle = this.dashboardPage.getTitle().getText();
+        System.out.println("My project");
+
+        this.dashboardPage.clickOnProjectNumberIcon(projectId)
+
+
+
     }
 
     @AfterMethod

@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 public class ProjectApiSteps extends BaseApiSteps {
 
     private final String BASIC_AUTH_INPUT = "admin";
-    public String createProject(String projectName, Integer ownerId) {
+    public String createProject(String projectName, String userName, String password, Integer ownerId) {
         CreateProject body = new CreateProject().builder()
                 .name(projectName)
                 .description("")
@@ -25,7 +25,7 @@ public class ProjectApiSteps extends BaseApiSteps {
                 .method(ProjectMethod.CREATE_PROJECT.getName())
                 .params(body)
                 .build();
-        Response response = restAssurePost(BASIC_AUTH_INPUT, BASIC_AUTH_INPUT, bodyArgs);
+        Response response = restAssurePost(userName, password, bodyArgs);
         response.then().statusCode(200);
         Results result = response.as(Results.class);
         return result.getResult().toString();

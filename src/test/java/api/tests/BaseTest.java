@@ -10,7 +10,6 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 public class BaseTest {
     @BeforeClass
     public void setUp() {
-
         Configuration.baseUrl = BASE_URL;
     }
 

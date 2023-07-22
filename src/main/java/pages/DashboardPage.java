@@ -20,42 +20,66 @@ public class DashboardPage {
     private SelenideElement inputIdentifierFormProject = $("#form-identifier");
     private SelenideElement inputTaskLimitFormProject = $("#form-task_limit");
     private SelenideElement checkBoxFormProject = $x("//*[contains(@name, 'swimlane')]");
-    private SelenideElement buttonSubmitFormProject  = $x("//button[@type='submit']");
+    private SelenideElement buttonSubmitFormProject = $x("//button[@type='submit']");
     private SelenideElement cancelRefFormProject = $x("//a[text()='cancel']");
     private SelenideElement errorProjectForm = $(".form-errors");
+    private List<SelenideElement> hRefElements = $$("//a[@href='#']");
+    private SelenideElement configure = $(".dropdown-submenu-open a[href='/project/27']");
+    private SelenideElement removeProject = $("a[href='/project/27/remove']");
 
     public SelenideElement getLogoutRef() {
         List<SelenideElement> logoutList = $$("a[href='/logout']");
         return logoutList.get(1);
     }
-    public String getTitleContainerName(){
+
+    public String getTitleContainerName() {
         return pageTitle.shouldBe(Condition.visible).getText();
     }
-    public LoginPage logOutFromDashboardPage(){
+
+    public LoginPage logOutFromDashboardPage() {
         avatarDropDown.shouldBe(Condition.visible).click();
         getLogoutRef().shouldBe(Condition.visible).click();
         return new LoginPage();
     }
-    public DashboardPage fillInNewProjectForm(String projectName, String identifier, Integer taskLimit){
+
+    public DashboardPage fillInNewProjectForm(String projectName, String identifier, Integer taskLimit) {
         inputNameFormProject.sendKeys(projectName);
         inputIdentifierFormProject.sendKeys(identifier);
         inputTaskLimitFormProject.sendKeys(taskLimit.toString());
         checkBoxFormProject.shouldBe(Condition.visible).click();
         return this;
     }
-    public DashboardPage openNewProjectForm(){
+
+    public DashboardPage openNewProjectForm() {
         projectCreateRef.shouldBe(Condition.visible).click();
         return this;
     }
-    public void clickSaveButtonNewProjectForm(){
+
+    public void clickSaveButtonNewProjectForm() {
         buttonSubmitFormProject.should(Condition.visible).click();
     }
-    public void clickCancelInNewProjectForm(){
+
+    public void clickCancelInNewProjectForm() {
         cancelRefFormProject.shouldBe(Condition.visible).click();
     }
-    public String getErrorProjectFormText(){
+
+    public String getErrorProjectFormText() {
         return errorProjectForm.shouldBe(Condition.visible).getText();
     }
+
+    public DashboardPage clickOnProjectNumberIcon(String projectId) {
+        hRefElements.stream()
+                .filter(e -> e != null)
+                .filter(e -> e.getText().contains("#" + projectId))
+                .findFirst()
+                .get()
+                .click();
+        return new ProjectPage();
+    }
+    public DashboardPage removeProjectByClickOnYesButton(){
+
+    }
+
 
 
 }
