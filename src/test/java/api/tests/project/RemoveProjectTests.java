@@ -20,6 +20,7 @@ public class RemoveProjectTests extends BaseTest {
     private static final String PASSWORD = "my_Pass";
     private static final String PROJECT_NAME = "Main project";
     private static final String IDENTIFIER = "PR20011";
+    private static final String ALERT_NO_PROJECT = "There is no project.";
     private static final Integer TASK_LIMIT = 5;
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();
     private UserApiSteps userApiSteps = new UserApiSteps();
@@ -27,6 +28,7 @@ public class RemoveProjectTests extends BaseTest {
     private String userId;
     private String actualTitle;         //for negative test
     private String projectId;
+    private boolean isRemoved = false;
 
     @BeforeMethod
     public void setUpMethod() {
@@ -48,6 +50,7 @@ public class RemoveProjectTests extends BaseTest {
     public void testRemoveProject() {
         ProjectsPage projectsPage = dashboardPage.clickOnProjectNumber(projectId)
                 .openProjectsPage();
+        Assert.assertEquals(projectsPage.getProjectsCount(), 1);
         ProjectPage projectPage = projectsPage
                 .openDropDownInChosenProject(projectId)
                 .clickConfigureToOpenProjectPage();
@@ -55,24 +58,16 @@ public class RemoveProjectTests extends BaseTest {
         Assert.assertTrue(projectPage.getTitle().getText().contains(PROJECT_NAME),
                 "Project page is not opened by clicking on it in Main page.");
 
-        ProjectsPage againProjectsPage = projectPage.removeProject(projectId);
-        Assert.assertFalse(
-                projectsPage.isContainProjectNumber(projectId),
-                "ProjectsPage contains project with number " + projectId);
+        projectsPage = projectPage.removeProject(projectId);
+        String actualAlert = projectsPage.getTextFromAlertNoProject();
+
+        isRemoved = actualAlert.contains(ALERT_NO_PROJECT);
+        Assert.assertEquals(actualAlert, ALERT_NO_PROJECT,
+                "Project is not removed");
     }
 
     @AfterMethod
     public void tearDownMethod() {
-        try{
-            String projectId =
-                    projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
-            if(projectId != null){
-                boolean isRemovedProject =
-                        projectApiSteps.removeProject(Integer.valueOf(projectId), USERNAME, PASSWORD);
-            }
-        } catch (Exception e){
-            throw new NullPointerException();
-        }
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
     }
 }
