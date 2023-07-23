@@ -16,7 +16,10 @@ public class ProjectsPage {
     private SelenideElement title = $(".title");
     private SelenideElement alert = $x("//div[contains(@class, 'alert-success')]");
     private List<SelenideElement> numberIcons = $$("a[href='#']");
-    private SelenideElement configure = $x("//ul[@class='dropdown-submenu-open']//a[contains(text(),'Configure')]");
+    private SelenideElement configure =
+            $x("//ul[@class='dropdown-submenu-open']//a[contains(text(),'Configure')]");
+    private SelenideElement listing =
+            $x("//ul[@class='dropdown-submenu-open']//a[contains(text(),'Listing')]");
     private SelenideElement projectsCount = $(".table-list-header-count");
     private SelenideElement alertNoProject = $x("//p[@class='alert']");
 
@@ -37,6 +40,10 @@ public class ProjectsPage {
     public ProjectPage clickConfigureToOpenProjectPage() {
         configure.shouldBe(Condition.visible).doubleClick();
         return new ProjectPage();
+    }
+    public ListProjectPage clickListingToOpenListProjectPage() {
+        listing.shouldBe(Condition.visible).doubleClick();
+        return new ListProjectPage();
     }
 
     public boolean isContainProjectNumber1(String projectId) {

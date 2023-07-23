@@ -1,10 +1,9 @@
-package api.tests.project;
+package api.tests.task;
 
 import api.enums.UserRole;
 import api.steps.ProjectApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
-import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -14,14 +13,13 @@ import pages.LoginPage;
 import pages.ProjectPage;
 import pages.ProjectsPage;
 
-public class RemoveProjectTests extends BaseTest {
-
+public class CreateTaskTests extends BaseTest {
     private static final String USERNAME = "Bossy";
     private static final String PASSWORD = "my_Pass";
     private static final String PROJECT_NAME = "Main project";
     private static final String IDENTIFIER = "PR20011";
-    private static final String ALERT_NO_PROJECT = "There is no project.";
     private static final Integer TASK_LIMIT = 5;
+    private static final String TASK_NAME = "The first task";
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();
     private UserApiSteps userApiSteps = new UserApiSteps();
     private DashboardPage dashboardPage;
@@ -42,29 +40,27 @@ public class RemoveProjectTests extends BaseTest {
                 .setPasswordInput(PASSWORD)
                 .openDashBoardPageByClickOnSubmitButton();
     }
-
-    @Description("Positive: Remove project by owner of this project.")
     @Test
-    public void testRemoveProject() {
+    public void testCreateTask(){
         ProjectsPage projectsPage = dashboardPage.clickOnProjectNumber(projectId)
                 .openProjectsPage();
         Assert.assertEquals(projectsPage.getProjectsCount(), 1);
         ProjectPage projectPage = projectsPage
                 .openDropDownInChosenProject(projectId)
                 .clickConfigureToOpenProjectPage();
+        projectPage.createNewTask(TASK_NAME);
 
-        Assert.assertTrue(projectPage.getTitle().getText().contains(PROJECT_NAME),
-                "Project page is not opened by clicking on it in Main page.");
 
-        projectsPage = projectPage.removeProject(projectId);
-        String actualAlert = projectsPage.getTextFromAlertNoProject();
 
-        Assert.assertEquals(actualAlert, ALERT_NO_PROJECT,
-                "Project is not removed");
     }
 
     @AfterMethod
     public void tearDownMethod() {
+
+        String projectId = projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
+        boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId), USERNAME, PASSWORD);
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
     }
+
+
 }
