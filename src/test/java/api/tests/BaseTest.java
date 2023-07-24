@@ -16,13 +16,6 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 public class BaseTest {
 
-
-
-//    @DataProvider(name = "data-provider")
-//    public Object[][] dpMethod(){
-//        return new Object[][] {{"chrome"}, {"edge"}, {"none"}};
-//    }
-
     @BeforeTest
     public void setUpTests(){
         Configuration.baseUrl = BASE_URL;

@@ -22,11 +22,11 @@ public class CreateTask {
     private Integer score;
     private Integer swimlane_id;
     private Integer priority;
-//    private Integer recurrence_status;
-//    private Integer recurrence_trigger;
-//    private Integer recurrence_factor;
-//    private Integer recurrence_timeframe;
-//    private Integer recurrence_basedate;
+    private Integer recurrence_status;
+    private Integer recurrence_trigger;
+    private Integer recurrence_factor;
+    private Integer recurrence_timeframe;
+    private Integer recurrence_basedate;
     private String reference;
     private String[] tags;
     private String date_started;

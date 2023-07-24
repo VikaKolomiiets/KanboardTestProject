@@ -9,7 +9,7 @@ public class ListProjectPage {
     private SelenideElement createSecondTask = $(".table-list-title");
 
 
-    public void clickOnCreateNewTask(){
+    public void clickOnCreateNewTask() {
         createSecondTask.shouldBe(Condition.visible).doubleClick();
     }
 

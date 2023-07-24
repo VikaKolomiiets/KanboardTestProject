@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -18,70 +17,67 @@ public class ProjectPage {
     private List<SelenideElement> actionMenuElements = $$(".js-modal-elarg");
     private SelenideElement taskNameInput = $("#form-title");
     private SelenideElement saveButton = $("button[type='submit']");
-
     private List<SelenideElement> createElements = $$x("//a[contains(@href, '/task/create')]");
     private List<SelenideElement> tableCells = $$("tbody tr td");
     private List<SelenideElement> activities = $$(".activity-title");
 
-    public SelenideElement getRemoveElementByProjectNumber(String projectNumber){
+
+    public SelenideElement getRemoveElementByProjectNumber(String projectNumber) {
         String selector = "a[href='/project/" + projectNumber + "/remove']";
         return $(selector);
     }
 
-    public SelenideElement getCloseElementByProjectNumber(String projectNumber){
+    public SelenideElement getCloseElementByProjectNumber(String projectNumber) {
         String selector = "a[href='/project/" + projectNumber + "/disable']";
         return $(selector);
     }
-    public ProjectsPage removeProject(String projectNumber){
+
+    public ProjectsPage removeProject(String projectNumber) {
         this.getRemoveElementByProjectNumber(projectNumber)
                 .shouldBe(Condition.visible)
                 .doubleClick();
         this.yesButton.shouldBe(Condition.visible).doubleClick();
         return new ProjectsPage();
     }
-    public ProjectPage cancelOfRemovingProject(String projectNumber){
+
+    public ProjectPage cancelOfRemovingProject(String projectNumber) {
         this.getRemoveElementByProjectNumber(projectNumber)
                 .shouldBe(Condition.visible)
                 .doubleClick();
         this.cancelHRef.shouldBe(Condition.visible).click();
         return this;
     }
-    public ProjectPage clickOnCreateNewTaskInActionMenu(){
+
+    public ProjectPage clickOnCreateNewTaskInActionMenu() {
         this.configureActionMenu.shouldBe(Condition.visible).click();
         SelenideElement element = this.createElements.get(1);
         element.shouldBe(Condition.visible).click();
         return this;
     }
-    public ProjectPage setNameInCreateNewTaskForm(String name){
+
+    public ProjectPage setNameInCreateNewTaskForm(String name) {
         this.taskNameInput.shouldBe(Condition.visible).sendKeys(name);
         return this;
     }
-    public ProjectPage clickSubmitButtonInCreateNewTaskForm(){
+
+    public ProjectPage clickSubmitButtonInCreateTaskForm() {
         this.saveButton.shouldBe(Condition.visible).doubleClick();
         return this;
     }
 
-    public ProjectPage createNewTask(String name){
+    public ProjectPage createNewTask(String name) {
         clickOnCreateNewTaskInActionMenu()
                 .setNameInCreateNewTaskForm(name)
-                .clickSubmitButtonInCreateNewTaskForm();
+                .clickSubmitButtonInCreateTaskForm();
         return this;
     }
 
-    public String getTitleText(){
-        return this.title.getText();
-    }
-
-    public boolean isContainTextInTableBody(String word){
+    public boolean isContainTextInTableBody(String word) {
         String text = this.tableCells.get(3).shouldBe(Condition.visible).getText();
         return text.contains(word);
     }
 
-    public boolean isTaskIdExistInActivities(String taskId){
+    public boolean isTaskIdExistInActivities(String taskId) {
         return this.activities.stream().filter(e -> e != null).anyMatch(e -> e.getText().contains(taskId));
     }
-
-
-
-
 }

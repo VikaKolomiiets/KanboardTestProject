@@ -22,7 +22,8 @@ public class DashboardPage {
     private SelenideElement buttonSubmitFormProject = $x("//button[@type='submit']");
     private SelenideElement cancelRefFormProject = $x("//a[text()='cancel']");
     private SelenideElement errorProjectForm = $(".form-errors");
-    public SelenideElement getProjectByNumberOnPage(String projectNumber){
+
+    public SelenideElement getProjectByNumberOnPage(String projectNumber) {
         String selector = "//*[contains(text(), '#" + projectNumber + "')]";
         return $x(selector);
     }
@@ -73,8 +74,5 @@ public class DashboardPage {
                 .doubleClick();
         return new ProjectsPage();
     }
-
-
-
 
 }

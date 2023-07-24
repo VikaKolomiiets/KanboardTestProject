@@ -45,7 +45,7 @@ public class TaskApiSteps extends BaseApiSteps {
         return actionOnTask(taskId, TaskMethod.CLOSE_TASK, userName, password);
     }
 
-    public boolean actionOnTask(Integer taskId, TaskMethod method, String userName, String password) {
+    private boolean actionOnTask(Integer taskId, TaskMethod method, String userName, String password) {
         TaskId body = new TaskId().builder()
                 .task_id(taskId)
                 .build();
@@ -57,5 +57,4 @@ public class TaskApiSteps extends BaseApiSteps {
         response.then().statusCode(200);
         return (boolean) response.as(Results.class).getResult();
     }
-
 }

@@ -31,5 +31,9 @@ public class ResponseProject {
     private Integer task_limit;
     private Integer enable_global_tags;
     private ResponseProjectUrl url;
-
+    public class ResponseProjectUrl {
+        private String board;
+        //private String calendar;
+        private String list;
+    }
 }

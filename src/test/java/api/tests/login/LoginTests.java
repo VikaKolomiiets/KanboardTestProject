@@ -15,7 +15,7 @@ public class LoginTests extends BaseTest {
     private static final String USERNAME = DataTests.addUniqueSuffix("Kate");
     private static final String PASSWORD = "myPass";
 
-    UserApiSteps userApiSteps = new UserApiSteps();
+    public UserApiSteps userApiSteps = new UserApiSteps();
     private String userId;
 
     @BeforeMethod

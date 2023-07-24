@@ -14,7 +14,6 @@ public enum ProjectMethod {
     ENABLE_PROJECT_PUBLIC_ACCESS("enableProjectPublicAccess"),
     DISABLE_PROJECT_PUBLIC_ACCESS("disableProjectPublicAccess"),
     GET_PROJECT_ACTIVITY("getProjectActivity")
-
     ;
 
     private String name;

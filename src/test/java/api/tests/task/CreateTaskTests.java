@@ -40,8 +40,9 @@ public class CreateTaskTests extends BaseTest {
                 .setPasswordInput(PASSWORD)
                 .openDashBoardPageByClickOnSubmitButton();
     }
+
     @Test
-    public void testCreateTask(){
+    public void testCreateTask() {
         ProjectsPage projectsPage = dashboardPage.clickOnProjectNumber(projectId)
                 .openProjectsPage();
         Assert.assertEquals(projectsPage.getProjectsCount(), 1);
@@ -49,8 +50,9 @@ public class CreateTaskTests extends BaseTest {
                 .openDropDownInChosenProject(projectId)
                 .clickConfigureToOpenProjectPage();
         boolean isExistBefore = projectPage.isContainTextInTableBody("1");
-        boolean isExistAfter =  projectPage.createNewTask(TASK_NAME).isContainTextInTableBody("1");
+        boolean isExistAfter = projectPage.createNewTask(TASK_NAME).isContainTextInTableBody("1");
         Assert.assertNotEquals(isExistAfter, isExistBefore, "Task is not added.");
+
     }
 
     @AfterMethod

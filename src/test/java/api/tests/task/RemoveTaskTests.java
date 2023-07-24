@@ -35,6 +35,7 @@ public class RemoveTaskTests extends BaseTest {
         System.out.println("UserId = " + userId);
         projectId = projectApiSteps.createProject(PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
         System.out.println("Project Id = " + projectId);
+
         taskId = taskApiSteps.createTask(
                 TASK_NAME, Integer.valueOf(projectId), Integer.valueOf(userId), USERNAME, PASSWORD);
         System.out.println("Task Id = " + taskId);
@@ -44,7 +45,6 @@ public class RemoveTaskTests extends BaseTest {
                 .setUserNameInput(USERNAME)
                 .setPasswordInput(PASSWORD)
                 .openDashBoardPageByClickOnSubmitButton();
-
         this.projectPage = this.dashboardPage
                 .clickOnProjectNumber(projectId)
                 .openProjectsPage()
@@ -55,8 +55,7 @@ public class RemoveTaskTests extends BaseTest {
     @Test
     public void testRemoveTask() {
         System.out.println("Good");
-    }
-
+    } // TODO check taskApiSteps.createTask
 
     @AfterMethod
     public void tearDownMethod() {
@@ -64,6 +63,4 @@ public class RemoveTaskTests extends BaseTest {
         boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId), USERNAME, PASSWORD);
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
     }
-
-
 }

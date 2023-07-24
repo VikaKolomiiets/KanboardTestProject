@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class FirstTests {
 
-    //private static final String KB_DASHBOARD_PAGE_URL = "http://localhost/kanboard/?controller=DashboardController&action=show";
     private static final String BASE_URL_UI = "http://127.0.0.1/kanboard/";
     private static final String BASE_URL_local = "http://127.0.0.1/dashboard/";
     private static final String BASE_URL = "http://127.0.0.1/";
