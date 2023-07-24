@@ -4,7 +4,6 @@ import api.steps.UserApiSteps;
 import api.tests.BaseTest;
 import api.utils.DataTests;
 import io.qameta.allure.Description;
-import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,7 +19,7 @@ public class LoginTests extends BaseTest {
     private String userId;
 
     @BeforeMethod
-    public void prepareDataForTest() {
+    public void setUpMethod() {
         userId = userApiSteps.createUser(USERNAME, PASSWORD);
         System.out.println(userId);
     }
@@ -34,9 +33,10 @@ public class LoginTests extends BaseTest {
                 .setPasswordInput(PASSWORD)
                 .openDashBoardPageByClickOnSubmitButton();
         String actualPageTitleName = dashboardPage.getTitleContainerName();
-                String expectedPageTitleName = "KB Dashboard for " + USERNAME.substring(0, 4);
+        String expectedPageTitleName = "KB Dashboard for " + USERNAME.substring(0, 4);
         Assert.assertEquals(actualPageTitleName, expectedPageTitleName, "New user cannot open DashBoard");
     }
+
     @Description("Positive")
     @Test
     public void testLoginByNewUserAndLogOut() {
@@ -50,12 +50,11 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(actualPageTitleName, expectedPageTitleName, "New user cannot open DashBoard");
         boolean isOnLoginPage = dashboardPage.logOutFromDashboardPage().isExistOnLoginPage();
         Assert.assertTrue(isOnLoginPage, "User can not log out from DashboardPage.");
-
     }
 
     @Description("Negative")
     @Test
-    public void testLoginByNewUserWithOutPassword(){
+    public void testLoginByNewUserWithOutPassword() {
         boolean isPresentOnLoginPage = new LoginPage()
                 .openLoginPage()
                 .setUserNameInput(USERNAME)
@@ -66,7 +65,7 @@ public class LoginTests extends BaseTest {
 
     @Description("Negative")
     @Test
-    public void testLoginByNewUserWithAdminPassword(){
+    public void testLoginByNewUserWithAdminPassword() {
         boolean isPresentOnLoginPage = new LoginPage()
                 .openLoginPage()
                 .setUserNameInput(USERNAME)
@@ -78,7 +77,7 @@ public class LoginTests extends BaseTest {
 
     @Description("Negative")
     @Test
-    public void testLoginWithOutAnyInputData(){
+    public void testLoginWithOutAnyInputData() {
         boolean isPresentOnLoginPage = new LoginPage()
                 .openLoginPage()
                 .clickOnSubmitButton()
@@ -87,8 +86,7 @@ public class LoginTests extends BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void removeUserAfterTest() {
-
+    public void tearDownMethod() {
         userApiSteps.removeUser(Integer.valueOf(userId));
     }
 }

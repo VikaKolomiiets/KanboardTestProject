@@ -60,7 +60,6 @@ public class RemoveTaskTests extends BaseTest {
 
     @AfterMethod
     public void tearDownMethod() {
-
         String projectId = projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
         boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId), USERNAME, PASSWORD);
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));

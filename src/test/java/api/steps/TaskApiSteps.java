@@ -16,7 +16,6 @@ public class TaskApiSteps extends BaseApiSteps {
                 .title(taskName)
                 .project_id(projectId)
                 .owner_id(userId)
-                //.color_id("Yellow")
                 .swimlane_id(0)
                 .priority(0)
                 .column_id(0)
