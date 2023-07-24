@@ -8,7 +8,7 @@ public enum UserRole {
     APP_USER("app-user");
     private String role;
 
-    UserRole(String role) {
+    private UserRole(String role) {
         this.role = role;
     }
 

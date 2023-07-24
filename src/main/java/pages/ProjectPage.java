@@ -74,11 +74,6 @@ public class ProjectPage {
     public boolean isContainTextInTableBody(String word){
         String text = this.tableCells.get(3).shouldBe(Condition.visible).getText();
         return text.contains(word);
-//        List<String> texts =  this.tableCells.stream()
-//                .filter(e -> e !=null)
-//                .map(e -> e.getText())
-//                .collect(Collectors.toList());
-//        return texts.stream().filter(s -> s != null).anyMatch(s -> s.contains(word));
     }
 
 

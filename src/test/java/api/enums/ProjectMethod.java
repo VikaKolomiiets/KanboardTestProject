@@ -19,7 +19,7 @@ public enum ProjectMethod {
 
     private String name;
 
-    ProjectMethod(String name) {
+    private ProjectMethod(String name) {
         this.name = name;
     }
     public String getName() {

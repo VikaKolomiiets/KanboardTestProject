@@ -32,7 +32,4 @@ public class ResponseProject {
     private Integer enable_global_tags;
     private ResponseProjectUrl url;
 
-//    private String default_swimlanel;
-//    private String show_default_swimlane;
-
 }

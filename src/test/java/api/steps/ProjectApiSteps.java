@@ -12,7 +12,6 @@ import java.util.LinkedHashMap;
 
 public class ProjectApiSteps extends BaseApiSteps {
 
-    private final String BASIC_AUTH_INPUT = "admin";
     public String createProject(String projectName, String userName, String password, Integer ownerId) {
         CreateProject body = new CreateProject().builder()
                 .name(projectName)

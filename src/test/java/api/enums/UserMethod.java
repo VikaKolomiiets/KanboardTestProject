@@ -13,7 +13,7 @@ public enum UserMethod {
 
     private String name;
 
-    UserMethod(String name) {
+    private UserMethod(String name) {
         this.name = name;
     }
 
