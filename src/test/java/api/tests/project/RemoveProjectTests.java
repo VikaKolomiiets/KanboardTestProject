@@ -4,6 +4,7 @@ import api.enums.UserRole;
 import api.steps.ProjectApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
+import api.utils.DataTests;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -16,10 +17,9 @@ import pages.ProjectsPage;
 
 public class RemoveProjectTests extends BaseTest {
 
-    private static final String USERNAME = "Bossy";
+    private static final String USERNAME = DataTests.addUniqueSuffix("Bossy");
     private static final String PASSWORD = "my_Pass";
-    private static final String PROJECT_NAME = "Main project";
-    private static final String IDENTIFIER = "PR20011";
+    private static final String PROJECT_NAME = DataTests.addUniqueSuffix("Main project");
     private static final String ALERT_NO_PROJECT = "There is no project.";
     private static final Integer TASK_LIMIT = 5;
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();

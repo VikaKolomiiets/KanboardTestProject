@@ -2,6 +2,7 @@ package api.tests.login;
 
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
+import api.utils.DataTests;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -12,7 +13,7 @@ import pages.DashboardPage;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
-    private static final String USERNAME = "Kate";
+    private static final String USERNAME = DataTests.addUniqueSuffix("Kate");
     private static final String PASSWORD = "myPass";
 
     UserApiSteps userApiSteps = new UserApiSteps();

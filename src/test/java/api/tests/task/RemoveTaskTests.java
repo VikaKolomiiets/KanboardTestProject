@@ -5,6 +5,7 @@ import api.steps.ProjectApiSteps;
 import api.steps.TaskApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
+import api.utils.DataTests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,15 +15,14 @@ import pages.ProjectPage;
 import pages.ProjectsPage;
 
 public class RemoveTaskTests extends BaseTest {
-    private static final String USERNAME = "Bossy";
+    private static final String USERNAME = DataTests.addUniqueSuffix("Bossy");
     private static final String PASSWORD = "my_Pass";
-    private static final String PROJECT_NAME = "Main project";
-    private static final String TASK_NAME = "The first task";
+    private static final String PROJECT_NAME = DataTests.addUniqueSuffix("Main project");
+    private static final String TASK_NAME = DataTests.addUniqueSuffix("The first task");
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();
     private UserApiSteps userApiSteps = new UserApiSteps();
     private TaskApiSteps taskApiSteps = new TaskApiSteps();
     private DashboardPage dashboardPage;
-    private ProjectsPage projectsPage;
     private ProjectPage projectPage;
     private String userId;
     private String projectId;
