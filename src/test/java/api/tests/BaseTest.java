@@ -29,9 +29,13 @@ public class BaseTest {
     }
 
     @BeforeClass
-    @Parameters({"Brawser type"})
-    public void setUpClass(String brawserType) {
-        Configuration.browser = brawserType;
+    @Parameters({"Browser type"})
+    public void setUpClass(String browserType) {
+        if(browserType.contains("headless")){
+            Configuration.headless = true;
+        } else {
+            Configuration.browser = browserType;
+        }
     }
 
     @AfterClass(alwaysRun = true)
