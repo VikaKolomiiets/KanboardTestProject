@@ -18,6 +18,7 @@ public class ProjectApiSteps extends BaseApiSteps {
                 .name(projectName)
                 .description("")
                 .owner_id(ownerId)
+
                 .start_date(LocalDate.now().toString())
                 .end_date(LocalDate.now().plusMonths(1).toString())
                 .build();

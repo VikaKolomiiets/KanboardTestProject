@@ -48,10 +48,12 @@ public class CreateTaskTests extends BaseTest {
         ProjectPage projectPage = projectsPage
                 .openDropDownInChosenProject(projectId)
                 .clickConfigureToOpenProjectPage();
-        projectPage.createNewTask(TASK_NAME);
-
-
-
+        //Assert.assertFalse(projectPage.getTitleText().contains("1"));
+//        String titleText = projectPage.createNewTask(TASK_NAME).getTitleText();
+//        Assert.assertTrue(titleText.contains("1"));
+        boolean isExistBefore = projectPage.isContainTextInTableBody("1");
+        boolean isExistAfter =  projectPage.createNewTask(TASK_NAME).isContainTextInTableBody("1");
+        Assert.assertNotEquals(isExistAfter, isExistBefore, "Task is not added.");
     }
 
     @AfterMethod

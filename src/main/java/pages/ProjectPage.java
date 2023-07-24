@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -13,10 +14,13 @@ public class ProjectPage {
     private SelenideElement title = $(".title");
     private SelenideElement yesButton = $("#modal-confirm-button");
     private SelenideElement cancelHRef = $x("//a[contains(text(), 'cancel')]");
-    private SelenideElement configureActionMenu = $(".action-menu");
+    private SelenideElement configureActionMenu = $x("//a[contains(@title, 'Configure this project')]");
     private List<SelenideElement> actionMenuElements = $$(".js-modal-elarg");
     private SelenideElement taskNameInput = $("#form-title");
-    private SelenideElement submitButton = $("button[type='submit']");
+    private SelenideElement saveButton = $("button[type='submit']");
+
+    private List<SelenideElement> createElements = $$x("//a[contains(@href, '/task/create')]");
+    private List<SelenideElement> tableCells = $$("tbody tr td");
 
     public SelenideElement getRemoveElementByProjectNumber(String projectNumber){
         String selector = "a[href='/project/" + projectNumber + "/remove']";
@@ -27,7 +31,6 @@ public class ProjectPage {
         String selector = "a[href='/project/" + projectNumber + "/disable']";
         return $(selector);
     }
-
     public ProjectsPage removeProject(String projectNumber){
         this.getRemoveElementByProjectNumber(projectNumber)
                 .shouldBe(Condition.visible)
@@ -43,14 +46,9 @@ public class ProjectPage {
         return this;
     }
     public ProjectPage clickOnCreateNewTaskInActionMenu(){
-        this.configureActionMenu.shouldBe(Condition.visible).doubleClick();
-        SelenideElement add = null;
-        for (SelenideElement element : this.actionMenuElements) {
-            if(element.getText().contains("Add a new")){
-                add = element;
-            }
-        }
-        add.doubleClick();
+        this.configureActionMenu.shouldBe(Condition.visible).click();
+        SelenideElement element = this.createElements.get(1);
+        element.shouldBe(Condition.visible).click();
         return this;
     }
     public ProjectPage setNameInCreateNewTaskForm(String name){
@@ -58,7 +56,7 @@ public class ProjectPage {
         return this;
     }
     public ProjectPage clickSubmitButtonInCreateNewTaskForm(){
-        this.submitButton.shouldBe(Condition.visible).doubleClick();
+        this.saveButton.shouldBe(Condition.visible).doubleClick();
         return this;
     }
 
@@ -67,6 +65,20 @@ public class ProjectPage {
                 .setNameInCreateNewTaskForm(name)
                 .clickSubmitButtonInCreateNewTaskForm();
         return this;
+    }
+
+    public String getTitleText(){
+        return this.title.getText();
+    }
+
+    public boolean isContainTextInTableBody(String word){
+        String text = this.tableCells.get(3).shouldBe(Condition.visible).getText();
+        return text.contains(word);
+//        List<String> texts =  this.tableCells.stream()
+//                .filter(e -> e !=null)
+//                .map(e -> e.getText())
+//                .collect(Collectors.toList());
+//        return texts.stream().filter(s -> s != null).anyMatch(s -> s.contains(word));
     }
 
 
