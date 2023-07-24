@@ -7,7 +7,7 @@ import java.util.Properties;
 import static java.util.Objects.isNull;
 
 public class EnvProperties {
-    private static final String PATH_TO_RESOURCE = "src/test/java/resources/";
+    private static final String PATH_TO_RESOURCE = "src/test/resources/";
     private static final String PROPERTIES_FILE_NAME = "env.properties";
     public static final String API_URL =
             propertyValue(PATH_TO_RESOURCE, PROPERTIES_FILE_NAME, "apiUrl");

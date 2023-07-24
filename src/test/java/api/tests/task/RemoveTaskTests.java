@@ -50,8 +50,6 @@ public class RemoveTaskTests extends BaseTest {
                 .openProjectsPage()
                 .openDropDownInChosenProject(projectId)
                 .clickConfigureToOpenProjectPage();
-
-
     }
 
     @Test

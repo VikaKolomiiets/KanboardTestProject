@@ -21,7 +21,6 @@ public class ApiUtils {
                 basic("admin", "admin").
                 header("Content-Type", "application/json").
 //                header("Cookie", "KB_SID=sufseo930noe2qbr1smedqumpe").
-//
                 body("{\"jsonrpc\": \"2.0\", \"method\": \"getMyProjects\", \"id\": 1}").  //from Documentation
                 post("http://localhost:80/jsonrpc.php");
         postRequest.prettyPrint();
