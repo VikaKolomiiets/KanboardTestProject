@@ -21,6 +21,7 @@ public class ProjectPage {
 
     private List<SelenideElement> createElements = $$x("//a[contains(@href, '/task/create')]");
     private List<SelenideElement> tableCells = $$("tbody tr td");
+    private List<SelenideElement> activities = $$(".activity-title");
 
     public SelenideElement getRemoveElementByProjectNumber(String projectNumber){
         String selector = "a[href='/project/" + projectNumber + "/remove']";
@@ -75,6 +76,12 @@ public class ProjectPage {
         String text = this.tableCells.get(3).shouldBe(Condition.visible).getText();
         return text.contains(word);
     }
+
+    public boolean isTaskIdExistInActivities(String taskId){
+        return this.activities.stream().filter(e -> e != null).anyMatch(e -> e.getText().contains(taskId));
+    }
+
+
 
 
 }

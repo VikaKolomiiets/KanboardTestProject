@@ -9,7 +9,7 @@ public enum TaskMethod {
     GET_OVERDUE_TASKS_BY_Project("getOverdueTasksByProject"),
     UPDATE_TASK("updateTask"),
     OPEN_TASK("openTask"),
-    CLOSE_TASL("closeTask"),
+    CLOSE_TASK("closeTask"),
     REMOVE_TASK("removeTask"),
     MOVE_TASK_POSITION("moveTaskPosition"),
     MOVE_TASK_TO_PROJECT("moveTaskToProject"), //Move a task to another project

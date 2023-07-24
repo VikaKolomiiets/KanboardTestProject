@@ -18,6 +18,8 @@ public class ProjectsPage {
     private List<SelenideElement> numberIcons = $$("a[href='#']");
     private SelenideElement configure =
             $x("//ul[@class='dropdown-submenu-open']//a[contains(text(),'Configure')]");
+    private SelenideElement activity =
+            $x("//ul[@class='dropdown-submenu-open']//a[contains(text(),'Activity')]");
     private SelenideElement listing =
             $x("//ul[@class='dropdown-submenu-open']//a[contains(text(),'Listing')]");
     private SelenideElement projectsCount = $(".table-list-header-count");
@@ -37,10 +39,16 @@ public class ProjectsPage {
         return this;
     }
 
+    public ProjectsPage clickActivityToOpenProjectActivity() {
+        this.activity.shouldBe(Condition.visible).doubleClick();
+        return this;
+    }
+
     public ProjectPage clickConfigureToOpenProjectPage() {
         configure.shouldBe(Condition.visible).doubleClick();
         return new ProjectPage();
     }
+
     public ListProjectPage clickListingToOpenListProjectPage() {
         listing.shouldBe(Condition.visible).doubleClick();
         return new ListProjectPage();
@@ -58,15 +66,16 @@ public class ProjectsPage {
             return pageTexts.stream().anyMatch(s -> s.contains(projectId));
         }
     }
-    public Integer getProjectsCount(){
+
+    public Integer getProjectsCount() {
         String elementText = projectsCount.shouldBe(Condition.visible).getText();
-        String number = Arrays.stream(elementText.split("[^0-9]+")).reduce((x,y) -> x.concat(y)).get();
+        String number = Arrays.stream(elementText.split("[^0-9]+")).reduce((x, y) -> x.concat(y)).get();
         return Integer.valueOf(number);
     }
-    public String getTextFromAlertNoProject(){
+
+    public String getTextFromAlertNoProject() {
         return this.alertNoProject.shouldBe(Condition.visible).getText();
     }
-
 
 
 }
