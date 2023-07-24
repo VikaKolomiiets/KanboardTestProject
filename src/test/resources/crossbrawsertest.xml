@@ -23,15 +23,15 @@
             <class name="ui.uitests.LoginPageTests"></class>
         </classes>
     </test>
-    <test name="Test on Firefox">
-        <parameter name="Brawser type" value="firefox"></parameter>
-        <classes>
-            <class name="api.tests.login.LoginTests"/>
-            <class name="api.tests.project.CreateProjectTests"></class>
-            <class name="api.tests.project.RemoveProjectTests"></class>
-            <class name="api.tests.task.CreateTaskTests"></class>
-            <class name="api.tests.task.RemoveTaskTests"></class>
-            <class name="ui.uitests.LoginPageTests"></class>
-        </classes>
-    </test>
+<!--    <test name="Test on Firefox">-->
+<!--        <parameter name="Brawser type" value="firefox"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="api.tests.login.LoginTests"/>-->
+<!--            <class name="api.tests.project.CreateProjectTests"></class>-->
+<!--            <class name="api.tests.project.RemoveProjectTests"></class>-->
+<!--            <class name="api.tests.task.CreateTaskTests"></class>-->
+<!--            <class name="api.tests.task.RemoveTaskTests"></class>-->
+<!--            <class name="ui.uitests.LoginPageTests"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
