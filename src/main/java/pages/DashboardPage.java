@@ -48,6 +48,9 @@ public class DashboardPage {
     public String getTitleRemoveTaskForm(){
         return $x("//*[contains(text(), 'Remove a task')]").getText();
     }
+    public String getTitleCloseTaskForm(){
+        return $x("//*[contains(text(), 'Close a task')]").getText();
+    }
 
     public LoginPage logOutFromDashboardPage() {
         avatarDropDown.shouldBe(Condition.visible).click();
@@ -97,5 +100,10 @@ public class DashboardPage {
         this.getByNumberOnPage(projectNumber).click();
         this.listing.shouldBe(Condition.visible).doubleClick();
         return new ProjectListingPage();
+    }
+    public DashboardPage getCloseTaskForm(String number){
+        this.getByNumberOnPage(number).shouldBe(Condition.visible).click();
+        this.closeTaskInDropDown.shouldBe(Condition.visible).doubleClick();
+        return this;
     }
 }

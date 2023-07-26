@@ -9,6 +9,7 @@
             <class name="api.tests.project.RemoveProjectTests"></class>
             <class name="api.tests.task.CreateTaskTests"></class>
             <class name="api.tests.task.RemoveTaskTests"></class>
+            <class name="api.tests.task.CloseTaskTests"></class>
             <class name="ui.uitests.LoginPageTests"></class>
         </classes>
     </test>
@@ -20,6 +21,7 @@
             <class name="api.tests.project.RemoveProjectTests"></class>
             <class name="api.tests.task.CreateTaskTests"></class>
             <class name="api.tests.task.RemoveTaskTests"></class>
+            <class name="api.tests.task.CloseTaskTests"></class>
             <class name="ui.uitests.LoginPageTests"></class>
         </classes>
     </test>
@@ -32,6 +34,7 @@
 <!--            <class name="api.tests.project.RemoveProjectTests"></class>-->
 <!--            <class name="api.tests.task.CreateTaskTests"></class>-->
 <!--            <class name="api.tests.task.RemoveTaskTests"></class>-->
+<!--            <class name="api.tests.task.CloseTaskTests"></class>-->
 <!--            <class name="ui.uitests.LoginPageTests"></class>-->
 <!--        </classes>-->
 <!--    </test>-->
@@ -43,6 +46,7 @@
             <class name="api.tests.project.RemoveProjectTests"></class>
             <class name="api.tests.task.CreateTaskTests"></class>
             <class name="api.tests.task.RemoveTaskTests"></class>
+            <class name="api.tests.task.CloseTaskTests"></class>
             <class name="ui.uitests.LoginPageTests"></class>
         </classes>
     </test>
