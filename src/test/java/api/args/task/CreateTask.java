@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class CreateTask {
     private String title;               //required
     private Integer project_id;         //required
-    private String color_id;
+    private String color_id;            //is filled in create Form "Yellow"
     private Integer column_id;
     private Integer owner_id;
     private Integer creator_id;
