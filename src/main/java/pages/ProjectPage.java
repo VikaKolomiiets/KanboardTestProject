@@ -22,6 +22,8 @@ public class ProjectPage {
     private List<SelenideElement> activities = $$(".activity-title");
 
 
+
+
     public SelenideElement getRemoveElementByProjectNumber(String projectNumber) {
         String selector = "a[href='/project/" + projectNumber + "/remove']";
         return $(selector);

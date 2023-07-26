@@ -51,7 +51,7 @@ public class CloseTaskTests extends BaseTest {
         String actualTitle = this.dashboardPage.getCloseTaskForm(taskId).getTitleCloseTaskForm();
         String expectedTitle = "Close a task";
         Assert.assertEquals(actualTitle, expectedTitle, "Close project page is not opened.");
-        this.dashboardPage.getButtonYes().doubleClick();
+        this.dashboardPage.clickYesButton();
         ProjectListingPage listingPage = this.dashboardPage.openProjectListing(projectId);
         String actualAlert = listingPage.getTextFromAlert();
         String expectedAlert = "No tasks found.";

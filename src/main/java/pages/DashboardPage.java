@@ -1,13 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$x;
 
 @Getter
 public class DashboardPage {
@@ -23,15 +23,21 @@ public class DashboardPage {
     private SelenideElement buttonSubmitFormProject = $x("//button[@type='submit']");
     private SelenideElement cancelRefFormProject = $x("//a[text()='cancel']");
     private SelenideElement errorProjectForm = $(".form-errors");
+    private SelenideElement moveTaskInDropDown = $x("//div[@id='dropdown']//a[contains(text(), 'Move to project')] ");
     private SelenideElement closeTaskInDropDown = $x("//div[@id='dropdown']//a[contains(text(), 'Close this task')] ");
     private SelenideElement removeTaskInDropDown = $x("//div[@id='dropdown']//a[contains(text(), 'Remove')] ");
     private SelenideElement buttonYes = $("#modal-confirm-button");
-   // private SelenideElement listingProjectDropDown = $x("//div[@class='dropdown'] //a[contains(text(), 'Listing')]");
-   private SelenideElement listing =
-           $x("//div[@id='dropdown']//a[contains(text(),'Listing')]");
+   private SelenideElement listing = $x("//div[@id='dropdown']//a[contains(text(),'Listing')]");
+
+
 
     public SelenideElement getByNumberOnPage(String number) {
         String selector = "//*[contains(text(), '#" + number + "')]";
+        return $x(selector);
+    }
+
+    public SelenideElement getInputByProjectName(String name){
+        String selector  = "//input[contains(@placeholder, '" + name + "')]";
         return $x(selector);
     }
 
@@ -50,6 +56,9 @@ public class DashboardPage {
     }
     public String getTitleCloseTaskForm(){
         return $x("//*[contains(text(), 'Close a task')]").getText();
+    }
+    public String getTitleMoveTaskForm(){
+        return $x("//h2[contains(text(), 'Move the')]").getText();
     }
 
     public LoginPage logOutFromDashboardPage() {
@@ -72,15 +81,22 @@ public class DashboardPage {
     }
 
     public void clickSaveButtonNewProjectForm() {
-        buttonSubmitFormProject.should(Condition.visible).click();
+        this.buttonSubmitFormProject.should(Condition.visible).click();
+    }
+    public TaskPage clickSaveButtonAndOpenTaskPage() {
+        this.buttonSubmitFormProject.should(Condition.visible).click();
+        return new TaskPage();
+    }
+    public void clickYesButton(){
+        this.getButtonYes().doubleClick();
     }
 
     public void clickCancelInNewProjectForm() {
-        cancelRefFormProject.shouldBe(Condition.visible).click();
+        this.cancelRefFormProject.shouldBe(Condition.visible).click();
     }
 
     public String getErrorProjectFormText() {
-        return errorProjectForm.shouldBe(Condition.visible).getText();
+        return this.errorProjectForm.shouldBe(Condition.visible).getText();
     }
 
     public ProjectsPage clickOnProjectNumber(String projectNumber) {
@@ -101,9 +117,22 @@ public class DashboardPage {
         this.listing.shouldBe(Condition.visible).doubleClick();
         return new ProjectListingPage();
     }
-    public DashboardPage getCloseTaskForm(String number){
-        this.getByNumberOnPage(number).shouldBe(Condition.visible).click();
+    public DashboardPage getCloseTaskForm(String taskNumber){
+        this.getByNumberOnPage(taskNumber).shouldBe(Condition.visible).click();
         this.closeTaskInDropDown.shouldBe(Condition.visible).doubleClick();
         return this;
     }
+    public DashboardPage getMoveTaskForm(String taskNumber){
+        this.getByNumberOnPage(taskNumber).shouldBe(Condition.visible).click();
+        this.moveTaskInDropDown.shouldBe(Condition.visible).doubleClick();
+        return this;
+    }
+
+    public DashboardPage chooseAnotherProjectForTest(String name){
+        SelenideElement input = this.getInputByProjectName(name);
+        input.shouldBe(Condition.visible).click();
+        input.sendKeys(name);
+        return this;
+    }
+
 }
