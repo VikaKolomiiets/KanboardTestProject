@@ -6,13 +6,14 @@ import api.steps.TaskApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
 import api.utils.DataTests;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
-import pages.ProjectPage;
-import pages.ProjectsPage;
+import pages.ProjectListingPage;
+
 
 public class RemoveTaskTests extends BaseTest {
     private static final String USERNAME = DataTests.addUniqueSuffix("Bossy");
@@ -23,7 +24,6 @@ public class RemoveTaskTests extends BaseTest {
     private UserApiSteps userApiSteps = new UserApiSteps();
     private TaskApiSteps taskApiSteps = new TaskApiSteps();
     private DashboardPage dashboardPage;
-    private ProjectPage projectPage;
     private String userId;
     private String projectId;
     private String taskId;
@@ -35,7 +35,6 @@ public class RemoveTaskTests extends BaseTest {
         System.out.println("UserId = " + userId);
         projectId = projectApiSteps.createProject(PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
         System.out.println("Project Id = " + projectId);
-
         taskId = taskApiSteps.createTask(
                 TASK_NAME, Integer.valueOf(projectId), Integer.valueOf(userId), USERNAME, PASSWORD);
         System.out.println("Task Id = " + taskId);
@@ -45,17 +44,20 @@ public class RemoveTaskTests extends BaseTest {
                 .setUserNameInput(USERNAME)
                 .setPasswordInput(PASSWORD)
                 .openDashBoardPageByClickOnSubmitButton();
-        this.projectPage = this.dashboardPage
-                .clickOnProjectNumber(projectId)
-                .openProjectsPage()
-                .openDropDownInChosenProject(projectId)
-                .clickConfigureToOpenProjectPage();
     }
 
     @Test
     public void testRemoveTask() {
-        System.out.println("Good");
-    } // TODO check taskApiSteps.createTask
+        String actualTitle =  this.dashboardPage.getRemoveTaskForm(this.taskId)
+                .getTitleRemoveTaskForm();
+        String expectedTitle = "Remove a task";
+        Assert.assertEquals(actualTitle, expectedTitle, "Remove task form is not opened.");
+        this.dashboardPage.getButtonYes().doubleClick();
+        ProjectListingPage listingPage = this.dashboardPage.openProjectListing(projectId);
+        String actualAlert = listingPage.getTextFromAlert();
+        String expectedAlert = "No tasks found.";
+        Assert.assertEquals(actualAlert, expectedAlert, "Alert with text about absent task is not exist.");
+    }
 
     @AfterMethod
     public void tearDownMethod() {

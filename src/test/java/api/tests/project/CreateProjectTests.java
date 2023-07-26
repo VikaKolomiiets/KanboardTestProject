@@ -42,7 +42,7 @@ public class CreateProjectTests extends BaseTest {
     @Test
     public void testCreateNewProject(){
         this.dashboardPage.openNewProjectForm()
-                .fillInNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
+                .fillNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
                 .clickSaveButtonNewProjectForm();
         actualTitle = this.dashboardPage.getTitleContainerName();
 
@@ -56,7 +56,7 @@ public class CreateProjectTests extends BaseTest {
     @Test
     public void testCreateCancelNewProject(){
         this.dashboardPage.openNewProjectForm()
-                .fillInNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
+                .fillNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
                 .clickCancelInNewProjectForm();
         actualTitle = this.dashboardPage.getTitle().getText();
 

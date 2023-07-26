@@ -14,16 +14,16 @@ import lombok.NoArgsConstructor;
 public class CreateTask {
     private String title;               //required
     private Integer project_id;         //required
-    private String color_id;            //is filled in create Form "Yellow"
-    private Integer column_id;
+    private String color_id;            //is filled by "Yellow"
+    private Integer column_id;          // DropDown menu = enum? Backing (as default), Ready, Work in progress, Done
     private Integer owner_id;
-    private Integer creator_id;
+    private Integer creator_id;         // ???
     private String date_due;
     private String description;
     private Integer category_id;
     private Integer score;
     private Integer swimlane_id;
-    private Integer priority;
+    private Integer priority;       // is filled by  - 0
     private Integer recurrence_status;
     private Integer recurrence_trigger;
     private Integer recurrence_factor;
