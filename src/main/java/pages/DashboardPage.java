@@ -30,7 +30,7 @@ public class DashboardPage {
     private SelenideElement buttonYes = $("#modal-confirm-button");
     private SelenideElement listing = $x("//div[@id='dropdown']//a[contains(text(),'Listing')]");
 
-@Step("Find Project Or Task By Given Number On DashboardPage")
+    @Step("Find Project Or Task By Given Number On DashboardPage")
     public SelenideElement getByNumberOnPage(String number) {
         String selector = "//*[contains(text(), '#" + number + "')]";
         return $x(selector);
@@ -103,6 +103,7 @@ public class DashboardPage {
         return this.errorProjectForm.shouldBe(Condition.visible).getText();
     }
 
+    @Step("Move To ProjectPage By Click On Its Number")
     public ProjectsPage clickOnProjectNumber(String projectNumber) {
         this.getByNumberOnPage(projectNumber)
                 .shouldBe(Condition.visible)
@@ -116,18 +117,21 @@ public class DashboardPage {
         this.listing.shouldBe(Condition.visible).doubleClick();
         return new ProjectListingPage();
     }
+
     @Step("By Given Task Number Open DropDown And Choose 'Remove'")
     public DashboardPage getRemoveTaskForm(String taskNumber) {
         this.getByNumberOnPage(taskNumber).shouldBe(Condition.visible).click();
         this.removeTaskInDropDown.shouldBe(Condition.visible).doubleClick();
         return this;
     }
+
     @Step("By Given Task Number Open DropDown And Choose 'Close this task'")
     public DashboardPage getCloseTaskForm(String taskNumber) {
         this.getByNumberOnPage(taskNumber).shouldBe(Condition.visible).click();
         this.closeTaskInDropDown.shouldBe(Condition.visible).doubleClick();
         return this;
     }
+
     @Step("By Given Task Number Open DropDown And Choose 'Move to project'")
     public DashboardPage getMoveTaskForm(String taskNumber) {
         this.getByNumberOnPage(taskNumber).shouldBe(Condition.visible).click();

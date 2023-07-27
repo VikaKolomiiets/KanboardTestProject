@@ -5,6 +5,7 @@ import api.steps.ProjectApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
 import api.utils.DataTests;
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -65,6 +66,12 @@ public class RemoveProjectTests extends BaseTest {
 
     @AfterMethod
     public void tearDownMethod() {
+        if(Selenide.title().contains(PROJECT_NAME)){
+            String projectId = projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
+            boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId),USERNAME, PASSWORD);
+        }
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
+
+
     }
 }
