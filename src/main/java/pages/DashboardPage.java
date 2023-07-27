@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.util.List;
@@ -27,17 +28,16 @@ public class DashboardPage {
     private SelenideElement closeTaskInDropDown = $x("//div[@id='dropdown']//a[contains(text(), 'Close this task')] ");
     private SelenideElement removeTaskInDropDown = $x("//div[@id='dropdown']//a[contains(text(), 'Remove')] ");
     private SelenideElement buttonYes = $("#modal-confirm-button");
-   private SelenideElement listing = $x("//div[@id='dropdown']//a[contains(text(),'Listing')]");
+    private SelenideElement listing = $x("//div[@id='dropdown']//a[contains(text(),'Listing')]");
 
-
-
+@Step("Find Project Or Task By Given Number On DashboardPage")
     public SelenideElement getByNumberOnPage(String number) {
         String selector = "//*[contains(text(), '#" + number + "')]";
         return $x(selector);
     }
 
-    public SelenideElement getInputByProjectName(String name){
-        String selector  = "//input[contains(@placeholder, '" + name + "')]";
+    public SelenideElement getInputByProjectName(String name) {
+        String selector = "//input[contains(@placeholder, '" + name + "')]";
         return $x(selector);
     }
 
@@ -51,13 +51,15 @@ public class DashboardPage {
         return pageTitle.shouldBe(Condition.visible).getText();
     }
 
-    public String getTitleRemoveTaskForm(){
+    public String getTitleRemoveTaskForm() {
         return $x("//*[contains(text(), 'Remove a task')]").getText();
     }
-    public String getTitleCloseTaskForm(){
+
+    public String getTitleCloseTaskForm() {
         return $x("//*[contains(text(), 'Close a task')]").getText();
     }
-    public String getTitleMoveTaskForm(){
+
+    public String getTitleMoveTaskForm() {
         return $x("//h2[contains(text(), 'Move the')]").getText();
     }
 
@@ -83,11 +85,13 @@ public class DashboardPage {
     public void clickSaveButtonNewProjectForm() {
         this.buttonSubmitFormProject.should(Condition.visible).click();
     }
+
     public TaskPage clickSaveButtonAndOpenTaskPage() {
         this.buttonSubmitFormProject.should(Condition.visible).click();
         return new TaskPage();
     }
-    public void clickYesButton(){
+
+    public void clickYesButton() {
         this.getButtonYes().doubleClick();
     }
 
@@ -106,29 +110,33 @@ public class DashboardPage {
         return new ProjectsPage();
     }
 
-    public DashboardPage getRemoveTaskForm(String number){
-        this.getByNumberOnPage(number).shouldBe(Condition.visible).click();
-        this.removeTaskInDropDown.shouldBe(Condition.visible).doubleClick();
-        return this;
-    }
-
-    public ProjectListingPage openProjectListing(String projectNumber){
+    @Step("By Given Project Number Open DropDown And Choose 'Listing'")
+    public ProjectListingPage openProjectListing(String projectNumber) {
         this.getByNumberOnPage(projectNumber).click();
         this.listing.shouldBe(Condition.visible).doubleClick();
         return new ProjectListingPage();
     }
-    public DashboardPage getCloseTaskForm(String taskNumber){
+    @Step("By Given Task Number Open DropDown And Choose 'Remove'")
+    public DashboardPage getRemoveTaskForm(String taskNumber) {
+        this.getByNumberOnPage(taskNumber).shouldBe(Condition.visible).click();
+        this.removeTaskInDropDown.shouldBe(Condition.visible).doubleClick();
+        return this;
+    }
+    @Step("By Given Task Number Open DropDown And Choose 'Close this task'")
+    public DashboardPage getCloseTaskForm(String taskNumber) {
         this.getByNumberOnPage(taskNumber).shouldBe(Condition.visible).click();
         this.closeTaskInDropDown.shouldBe(Condition.visible).doubleClick();
         return this;
     }
-    public DashboardPage getMoveTaskForm(String taskNumber){
+    @Step("By Given Task Number Open DropDown And Choose 'Move to project'")
+    public DashboardPage getMoveTaskForm(String taskNumber) {
         this.getByNumberOnPage(taskNumber).shouldBe(Condition.visible).click();
         this.moveTaskInDropDown.shouldBe(Condition.visible).doubleClick();
         return this;
     }
 
-    public DashboardPage chooseAnotherProjectForTest(String name){
+    @Step("Choose Input Cell And Sent it Given Project Name")
+    public DashboardPage chooseAnotherProjectForTest(String name) {
         SelenideElement input = this.getInputByProjectName(name);
         input.shouldBe(Condition.visible).click();
         input.sendKeys(name);
