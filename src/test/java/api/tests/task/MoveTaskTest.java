@@ -12,7 +12,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
-import pages.ProjectPage;
 import pages.TaskPage;
 
 public class MoveTaskTest extends BaseTest {
@@ -27,8 +26,8 @@ public class MoveTaskTest extends BaseTest {
     private TaskApiSteps taskApiSteps = new TaskApiSteps();
     private DashboardPage dashboardPage;
     private String userId;
-    private String fromProjectId;
-    private String toProjectId;
+    private String projectIdFrom;
+    private String projectIdTo;
     private String taskId;
 
     @BeforeMethod
@@ -36,12 +35,12 @@ public class MoveTaskTest extends BaseTest {
         userId = userApiSteps.createUser(USERNAME, PASSWORD);
         boolean isManager = userApiSteps.updateUserRole(Integer.valueOf(userId), UserRole.APP_MANAGER);
         System.out.println("UserId = " + userId);
-        fromProjectId = projectApiSteps.createProject(FROM_PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
-        System.out.println("Project Id = " + fromProjectId);
-        toProjectId = projectApiSteps.createProject(TO_PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
-        System.out.println("Project Id = " + toProjectId);
+        projectIdFrom = projectApiSteps.createProject(FROM_PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
+        System.out.println("Project Id = " + projectIdFrom);
+        projectIdTo = projectApiSteps.createProject(TO_PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
+        System.out.println("Project Id = " + projectIdTo);
         taskId = taskApiSteps.createTask(
-                TASK_NAME, Integer.valueOf(fromProjectId), Integer.valueOf(userId), USERNAME, PASSWORD);
+                TASK_NAME, Integer.valueOf(projectIdFrom), Integer.valueOf(userId), USERNAME, PASSWORD);
         System.out.println("Task Id = " + taskId);
 
         this.dashboardPage = new LoginPage()
@@ -53,16 +52,18 @@ public class MoveTaskTest extends BaseTest {
 
     @Test
     public void testMoveTaskToAnotherProjectSameOwner() {
-        String actualTitle = this.dashboardPage.getMoveTaskForm(taskId).getTitleMoveTaskForm();
+        String actualTitleMoveForm = this.dashboardPage.getMoveTaskForm(taskId).getTitleMoveTaskForm();
         String expectedTitle = "Move the task to another project";
-        Assert.assertEquals(actualTitle, expectedTitle, "Move Form is not opened.");
+        Assert.assertEquals(actualTitleMoveForm, expectedTitle, "Move Form is not opened.");
         TaskPage taskPage = this.dashboardPage
                 .chooseAnotherProjectForTest(TO_PROJECT_NAME)
                 .clickSaveButtonAndOpenTaskPage();
-        String actualProjectName = taskPage.getTitle().getText();
-        Assert.assertEquals(actualProjectName, TO_PROJECT_NAME, "Containing task Project is not changed.");
+
         String actualTaskName = taskPage.getTaskNameOnProjectPage();
         Assert.assertEquals(actualTaskName, TASK_NAME, "Task is not exist on new Project Page");
+
+        String actualProjectName = taskPage.getTitle().getText();
+        Assert.assertEquals(actualProjectName, TO_PROJECT_NAME, "Containing task Project is not changed.");
     }
 
 
