@@ -41,34 +41,33 @@ public class DashboardPage {
         return $x(selector);
     }
 
-
     public SelenideElement getLogoutRef() {
         List<SelenideElement> logoutList = $$("a[href='/logout']");
         return logoutList.get(1);
     }
-
+    @Step("Get title name from Container")
     public String getTitleContainerName() {
         return pageTitle.shouldBe(Condition.visible).getText();
     }
-
+    @Step("Get title name from Remove Task Form")
     public String getTitleRemoveTaskForm() {
         return $x("//*[contains(text(), 'Remove a task')]").getText();
     }
-
+    @Step("Get title name from Close Task Form")
     public String getTitleCloseTaskForm() {
         return $x("//*[contains(text(), 'Close a task')]").getText();
     }
-
+    @Step("Get title name from Move Task Form")
     public String getTitleMoveTaskForm() {
         return $x("//h2[contains(text(), 'Move the')]").getText();
     }
-
+    @Step("Log out from Dashboard page")
     public LoginPage logOutFromDashboardPage() {
         avatarDropDown.shouldBe(Condition.visible).click();
         getLogoutRef().shouldBe(Condition.visible).click();
         return new LoginPage();
     }
-
+    @Step("Fill in form to create new Project by given data")
     public DashboardPage fillNewProjectForm(String projectName, String identifier, Integer taskLimit) {
         inputNameFormProject.sendKeys(projectName);
         inputIdentifierFormProject.sendKeys(identifier);
@@ -76,29 +75,31 @@ public class DashboardPage {
         checkBoxFormProject.shouldBe(Condition.visible).click();
         return this;
     }
-
+    @Step("Open form to create new Project")
     public DashboardPage openNewProjectForm() {
         projectCreateRef.shouldBe(Condition.visible).click();
         return this;
     }
-
+    @Step("Submit creation of new Project by clicking on save button")
     public void clickSaveButtonNewProjectForm() {
         this.buttonSubmitFormProject.should(Condition.visible).click();
     }
-
+    @Step("Submit creation of new Task by clicking on save button")
     public TaskPage clickSaveButtonAndOpenTaskPage() {
         this.buttonSubmitFormProject.should(Condition.visible).click();
         return new TaskPage();
     }
-
+    @Step("Submit by clicking on yes button")
     public void clickYesButton() {
         this.getButtonYes().doubleClick();
     }
 
+    @Step("Cancel creation of new Project in the form")
     public void clickCancelInNewProjectForm() {
         this.cancelRefFormProject.shouldBe(Condition.visible).click();
     }
 
+    @Step("Get Message from error alert")
     public String getErrorProjectFormText() {
         return this.errorProjectForm.shouldBe(Condition.visible).getText();
     }

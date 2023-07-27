@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.util.List;
@@ -22,18 +23,12 @@ public class ProjectPage {
     private List<SelenideElement> activities = $$(".activity-title");
 
 
-
-
     public SelenideElement getRemoveElementByProjectNumber(String projectNumber) {
         String selector = "a[href='/project/" + projectNumber + "/remove']";
         return $(selector);
     }
 
-    public SelenideElement getCloseElementByProjectNumber(String projectNumber) {
-        String selector = "a[href='/project/" + projectNumber + "/disable']";
-        return $(selector);
-    }
-
+    @Step("Given Project click remove and submit it by clicking yes button")
     public ProjectsPage removeProject(String projectNumber) {
         this.getRemoveElementByProjectNumber(projectNumber)
                 .shouldBe(Condition.visible)
@@ -79,7 +74,4 @@ public class ProjectPage {
         return text.contains(word);
     }
 
-    public boolean isTaskIdExistInActivities(String taskId) {
-        return this.activities.stream().filter(e -> e != null).anyMatch(e -> e.getText().contains(taskId));
-    }
 }
