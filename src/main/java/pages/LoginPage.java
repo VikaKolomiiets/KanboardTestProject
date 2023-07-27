@@ -16,11 +16,11 @@ public class LoginPage {
     private SelenideElement pageTitle = $x("//title[contains(text(), 'Login')]");
     private SelenideElement forgotPassword = $("a[href]");
     private SelenideElement passwordReset = $x("//h2[contains(text(), 'Reset')]");
-
+    @Step("Verify page title")
     public boolean isExistOnLoginPage() {
         return pageTitle.exists();
     }
-
+    @Step("Click on submit button")
     public LoginPage clickOnSubmitButton() {
         signInButton.shouldBe(Condition.visible).click();
         return this;
@@ -43,17 +43,18 @@ public class LoginPage {
         signInButton.shouldBe(Condition.visible).click();
         return new DashboardPage();
     }
-
+@Step("Click on link ForgetPassword and check: message is Exist")
     public boolean clickOnForgetPassword() {
         forgotPassword.shouldBe(Condition.visible).click();
         return passwordReset.shouldBe(Condition.visible).exists();
     }
-
+@Step("Open Login Page")
     public LoginPage openLoginPage() {
         open("");
         return new LoginPage();
     }
 
+    @Step("Fill in userName and Password in Login page to open DashboardPage")
     public DashboardPage openDashboardPage(String userName, String password){
         this.openLoginPage()
                 .setUserNameInput(userName)
