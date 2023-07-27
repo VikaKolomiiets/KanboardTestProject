@@ -27,11 +27,7 @@ public class LoginTests extends BaseTest {
     @Description("Positive")
     @Test
     public void testLoginByNewUser() {
-        DashboardPage dashboardPage = new LoginPage()
-                .openLoginPage()
-                .setUserNameInput(USERNAME)
-                .setPasswordInput(PASSWORD)
-                .openDashBoardPageByClickOnSubmitButton();
+        DashboardPage dashboardPage = new LoginPage().openDashboardPage(USERNAME, PASSWORD);
         String actualPageTitleName = dashboardPage.getTitleContainerName();
         String expectedPageTitleName = "KB Dashboard for " + USERNAME.substring(0, 4);
         Assert.assertEquals(actualPageTitleName, expectedPageTitleName, "New user cannot open DashBoard");
@@ -40,11 +36,7 @@ public class LoginTests extends BaseTest {
     @Description("Positive")
     @Test
     public void testLoginByNewUserAndLogOut() {
-        DashboardPage dashboardPage = new LoginPage()
-                .openLoginPage()
-                .setUserNameInput(USERNAME)
-                .setPasswordInput(PASSWORD)
-                .openDashBoardPageByClickOnSubmitButton();
+        DashboardPage dashboardPage = new LoginPage().openDashboardPage(USERNAME, PASSWORD);
         String actualPageTitleName = dashboardPage.getTitleContainerName();
         String expectedPageTitleName = "KB Dashboard for " + USERNAME.substring(0, 4);
         Assert.assertEquals(actualPageTitleName, expectedPageTitleName, "New user cannot open DashBoard");

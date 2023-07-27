@@ -31,11 +31,7 @@ public class CreateProjectTests extends BaseTest {
         userId = userApiSteps.createUser(USERNAME, PASSWORD);
         boolean isManager = userApiSteps.updateUserRole(Integer.valueOf(userId), UserRole.APP_MANAGER);
         System.out.println(userId);
-        this.dashboardPage = new LoginPage()
-                .openLoginPage()
-                .setUserNameInput(USERNAME)
-                .setPasswordInput(PASSWORD)
-                .openDashBoardPageByClickOnSubmitButton();
+        this.dashboardPage = new LoginPage().openDashboardPage(USERNAME, PASSWORD);
     }
 
     @Description("Positive")

@@ -53,4 +53,14 @@ public class LoginPage {
         open("");
         return new LoginPage();
     }
+
+    public DashboardPage openDashboardPage(String userName, String password){
+        this.openLoginPage()
+                .setUserNameInput(userName)
+                .setPasswordInput(password)
+                .openDashBoardPageByClickOnSubmitButton();
+        return new DashboardPage();
+    }
+
+
 }

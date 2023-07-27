@@ -43,11 +43,7 @@ public class MoveTaskTest extends BaseTest {
                 TASK_NAME, Integer.valueOf(projectIdFrom), Integer.valueOf(userId), USERNAME, PASSWORD);
         System.out.println("Task Id = " + taskId);
 
-        this.dashboardPage = new LoginPage()
-                .openLoginPage()
-                .setUserNameInput(USERNAME)
-                .setPasswordInput(PASSWORD)
-                .openDashBoardPageByClickOnSubmitButton();
+        this.dashboardPage = new LoginPage().openDashboardPage(USERNAME, PASSWORD);
     }
 
     @Test

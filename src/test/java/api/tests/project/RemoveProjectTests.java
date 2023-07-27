@@ -37,11 +37,7 @@ public class RemoveProjectTests extends BaseTest {
         System.out.println("UserId = " + userId);
         projectId = projectApiSteps.createProject(PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
         System.out.println("Project Id = " + projectId);
-        this.dashboardPage = new LoginPage()
-                .openLoginPage()
-                .setUserNameInput(USERNAME)
-                .setPasswordInput(PASSWORD)
-                .openDashBoardPageByClickOnSubmitButton();
+        this.dashboardPage = new LoginPage().openDashboardPage(USERNAME, PASSWORD);
     }
 
     @Description("Positive: Remove project by owner of this project.")
@@ -66,7 +62,7 @@ public class RemoveProjectTests extends BaseTest {
 
     @AfterMethod
     public void tearDownMethod() {
-        if(Selenide.title().contains(PROJECT_NAME)){
+        if(Selenide.title().contains("project")){
             String projectId = projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
             boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId),USERNAME, PASSWORD);
         }
