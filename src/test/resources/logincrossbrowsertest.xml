@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!--<suite name="Api regression org" parallel="methods" thread-count="5">-->
+<suite name="Login Cross Browser Testing">
+    <test name="Test on Edge">
+        <parameter name="Browser type" value="edge"></parameter>
+        <classes>
+<!--            <class name="api.tests.login.LoginTests"/>-->
+            <class name="ui.uitests.LoginPageTests"></class>
+        </classes>
+    </test>
+    <test name="Test on Chrome">
+        <parameter name="Browser type" value="chrome"></parameter>
+        <classes>
+<!--            <class name="api.tests.login.LoginTests"/>-->
+            <class name="ui.uitests.LoginPageTests"></class>
+        </classes>
+    </test>
+    <!--    <test name="Test on Firefox">-->
+    <!--        <parameter name="Browser type" value="firefox"></parameter>-->
+    <!--        <classes>-->
+    <!--            <class name="api.tests.login.LoginTests"/>-->
+    <!--            <class name="ui.uitests.LoginPageTests"></class>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <test name="Test Headless">
+        <parameter name="Browser type" value="headless"></parameter>
+        <classes>
+<!--            <class name="api.tests.login.LoginTests"/>-->
+            <class name="ui.uitests.LoginPageTests"></class>
+        </classes>
+    </test>
+</suite>

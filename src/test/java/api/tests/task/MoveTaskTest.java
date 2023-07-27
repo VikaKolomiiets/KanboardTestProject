@@ -5,7 +5,7 @@ import api.steps.ProjectApiSteps;
 import api.steps.TaskApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
-import api.utils.DataTests;
+import api.utils.AddRandomDataTests;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,11 +16,11 @@ import pages.TaskPage;
 
 public class MoveTaskTest extends BaseTest {
 
-    private static final String USERNAME = DataTests.addUniqueSuffix("Bossy");
+    private static final String USERNAME = AddRandomDataTests.addUniqueSuffix("Bossy");
     private static final String PASSWORD = "my_Pass";
-    private static final String FROM_PROJECT_NAME = DataTests.addUniqueSuffix("First project");
-    private static final String TO_PROJECT_NAME = DataTests.addUniqueSuffix("Third project");
-    private static final String TASK_NAME = DataTests.addUniqueSuffix("Moving task");
+    private static final String FROM_PROJECT_NAME = AddRandomDataTests.addUniqueSuffix("First project");
+    private static final String TO_PROJECT_NAME = AddRandomDataTests.addUniqueSuffix("Third project");
+    private static final String TASK_NAME = AddRandomDataTests.addUniqueSuffix("Moving task");
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();
     private UserApiSteps userApiSteps = new UserApiSteps();
     private TaskApiSteps taskApiSteps = new TaskApiSteps();

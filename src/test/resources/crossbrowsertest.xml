@@ -11,7 +11,6 @@
             <class name="api.tests.task.RemoveTaskTests"></class>
             <class name="api.tests.task.CloseTaskTests"></class>
             <class name="api.tests.task.MoveTaskTest"></class>
-            <class name="ui.uitests.LoginPageTests"></class>
         </classes>
     </test>
     <test name="Test on Chrome">
@@ -24,7 +23,6 @@
             <class name="api.tests.task.RemoveTaskTests"></class>
             <class name="api.tests.task.CloseTaskTests"></class>
             <class name="api.tests.task.MoveTaskTest"></class>
-            <class name="ui.uitests.LoginPageTests"></class>
         </classes>
     </test>
 
@@ -38,7 +36,6 @@
 <!--            <class name="api.tests.task.RemoveTaskTests"></class>-->
 <!--            <class name="api.tests.task.CloseTaskTests"></class>-->
 <!--            <class name="api.tests.task.MoveTaskTest"></class>-->
-<!--            <class name="ui.uitests.LoginPageTests"></class>-->
 <!--        </classes>-->
 <!--    </test>-->
     <test name="Test Headless">
@@ -51,7 +48,6 @@
             <class name="api.tests.task.RemoveTaskTests"></class>
             <class name="api.tests.task.CloseTaskTests"></class>
             <class name="api.tests.task.MoveTaskTest"></class>
-            <class name="ui.uitests.LoginPageTests"></class>
         </classes>
     </test>
 </suite>

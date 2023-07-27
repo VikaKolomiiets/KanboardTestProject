@@ -4,7 +4,7 @@ import api.enums.UserRole;
 import api.steps.ProjectApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
-import api.utils.DataTests;
+import api.utils.AddRandomDataTests;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import org.testng.Assert;
@@ -18,9 +18,9 @@ import pages.ProjectsPage;
 
 public class RemoveProjectTests extends BaseTest {
 
-    private static final String USERNAME = DataTests.addUniqueSuffix("Bossy");
+    private static final String USERNAME = AddRandomDataTests.addUniqueSuffix("Bossy");
     private static final String PASSWORD = "my_Pass";
-    private static final String PROJECT_NAME = DataTests.addUniqueSuffix("Main project");
+    private static final String PROJECT_NAME = AddRandomDataTests.addUniqueSuffix("Main project");
     private static final String ALERT_NO_PROJECT = "There is no project.";
     private static final Integer TASK_LIMIT = 5;
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();
