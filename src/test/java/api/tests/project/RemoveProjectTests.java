@@ -4,7 +4,8 @@ import api.enums.UserRole;
 import api.steps.ProjectApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
-import api.utils.DataTests;
+import api.utils.AddRandomDataTests;
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -17,9 +18,9 @@ import pages.ProjectsPage;
 
 public class RemoveProjectTests extends BaseTest {
 
-    private static final String USERNAME = DataTests.addUniqueSuffix("Bossy");
+    private static final String USERNAME = AddRandomDataTests.addUniqueSuffix("Bossy");
     private static final String PASSWORD = "my_Pass";
-    private static final String PROJECT_NAME = DataTests.addUniqueSuffix("Main project");
+    private static final String PROJECT_NAME = AddRandomDataTests.addUniqueSuffix("Main project");
     private static final String ALERT_NO_PROJECT = "There is no project.";
     private static final Integer TASK_LIMIT = 5;
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();
@@ -36,11 +37,7 @@ public class RemoveProjectTests extends BaseTest {
         System.out.println("UserId = " + userId);
         projectId = projectApiSteps.createProject(PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
         System.out.println("Project Id = " + projectId);
-        this.dashboardPage = new LoginPage()
-                .openLoginPage()
-                .setUserNameInput(USERNAME)
-                .setPasswordInput(PASSWORD)
-                .openDashBoardPageByClickOnSubmitButton();
+        this.dashboardPage = new LoginPage().openDashboardPage(USERNAME, PASSWORD);
     }
 
     @Description("Positive: Remove project by owner of this project.")
@@ -65,6 +62,12 @@ public class RemoveProjectTests extends BaseTest {
 
     @AfterMethod
     public void tearDownMethod() {
+        if(Selenide.title().contains("project")){
+            String projectId = projectApiSteps.getProjectIdByName(PROJECT_NAME, USERNAME, PASSWORD);
+            boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId),USERNAME, PASSWORD);
+        }
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
+
+
     }
 }

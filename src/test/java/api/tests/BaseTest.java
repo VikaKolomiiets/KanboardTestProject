@@ -16,35 +16,35 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 public class BaseTest {
 
-//    @BeforeTest
-//    public void setUpTests(){
-//        Configuration.baseUrl = BASE_URL;
-//    }
-//
-//    @BeforeClass
-//    @Parameters({"Browser type"})
-//    public void setUpClass(String browserType) {
-//        if(browserType.contains("headless")){
-//            Configuration.headless = true;
-//        } else {
-//            Configuration.browser = browserType;
-//        }
-//    }
-//
-//
-
-    @BeforeClass
-    public void setUpClass(){
+    @BeforeTest
+    public void setUpTests(){
         Configuration.baseUrl = BASE_URL;
     }
 
-    @AfterClass(alwaysRun = true)
-    public void tearDownClass() {
-        closeWebDriver();
+    @BeforeClass
+    @Parameters({"Browser type"})
+    public void setUpClass(String browserType) {
+        if(browserType.contains("headless")){
+            Configuration.headless = true;
+        } else {
+            Configuration.browser = browserType;
+        }
     }
 
-//    @AfterTest
-//    public void tearDownTests(){
-//        System.out.println("All browsers were tested");
+
+
+//    @BeforeClass
+//    public void setUpClass(){
+//        Configuration.baseUrl = BASE_URL;
 //    }
+//
+//    @AfterClass(alwaysRun = true)
+//    public void tearDownClass() {
+//        closeWebDriver();
+//    }
+
+    @AfterTest
+    public void tearDownTests(){
+        System.out.println("All browsers were tested");
+    }
 }

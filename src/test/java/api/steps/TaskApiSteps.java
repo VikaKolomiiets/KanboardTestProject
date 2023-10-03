@@ -2,6 +2,7 @@ package api.steps;
 
 import api.args.task.CreateTask;
 import api.args.task.TaskId;
+import api.enums.TaskColumn;
 import api.enums.TaskMethod;
 import api.models.BodyArgs;
 import api.models.Results;
@@ -15,10 +16,12 @@ public class TaskApiSteps extends BaseApiSteps {
         CreateTask body = new CreateTask().builder()
                 .title(taskName)
                 .project_id(projectId)
+                .creator_id(userId)
+                .reference("TICKET-1234")
                 .owner_id(userId)
-                .swimlane_id(0)
+                .swimlane_id(projectId)
                 .priority(0)
-                .column_id(0)
+                .column_id(Integer.valueOf(TaskColumn.BACKLOG.ordinal()))
                 .tags(new String[0])
                 .date_started(LocalDate.now().plusWeeks(1).toString())
                 .build();

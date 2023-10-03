@@ -2,6 +2,7 @@ package api.tests.task;
 
 import api.enums.UserRole;
 import api.steps.ProjectApiSteps;
+import api.steps.TaskApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
 import api.utils.AddRandomDataTests;
@@ -11,10 +12,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
-import pages.ProjectPage;
-import pages.ProjectsPage;
+import pages.ProjectListingPage;
 
-public class CreateTaskTests extends BaseTest {
+public class CloseTaskTests extends BaseTest {
 
     private static final String USERNAME = AddRandomDataTests.addUniqueSuffix("Bossy");
     private static final String PASSWORD = "my_Pass";
@@ -22,10 +22,11 @@ public class CreateTaskTests extends BaseTest {
     private static final String TASK_NAME = AddRandomDataTests.addUniqueSuffix("The first task");
     private ProjectApiSteps projectApiSteps = new ProjectApiSteps();
     private UserApiSteps userApiSteps = new UserApiSteps();
+    private TaskApiSteps taskApiSteps = new TaskApiSteps();
     private DashboardPage dashboardPage;
     private String userId;
     private String projectId;
-
+    private String taskId;
 
     @BeforeMethod
     public void setUpMethod() {
@@ -34,21 +35,23 @@ public class CreateTaskTests extends BaseTest {
         System.out.println("UserId = " + userId);
         projectId = projectApiSteps.createProject(PROJECT_NAME, USERNAME, PASSWORD, Integer.valueOf(userId));
         System.out.println("Project Id = " + projectId);
+        taskId = taskApiSteps.createTask(
+                TASK_NAME, Integer.valueOf(projectId), Integer.valueOf(userId), USERNAME, PASSWORD);
+        System.out.println("Task Id = " + taskId);
+
         this.dashboardPage = new LoginPage().openDashboardPage(USERNAME, PASSWORD);
     }
 
     @Test
-    public void testCreateTask() {
-        ProjectsPage projectsPage = dashboardPage.clickOnProjectNumber(projectId)
-                .openProjectsPage();
-        Assert.assertEquals(projectsPage.getProjectsCount(), 1);
-        ProjectPage projectPage = projectsPage
-                .openDropDownInChosenProject(projectId)
-                .clickConfigureToOpenProjectPage();
-        boolean isExistBefore = projectPage.isContainTextInTableBody("1");
-        boolean isExistAfter = projectPage.createNewTask(TASK_NAME).isContainTextInTableBody("1");
-        Assert.assertNotEquals(isExistAfter, isExistBefore, "Task is not added.");
-
+    public void testCloseTask() {
+        String actualTitle = this.dashboardPage.getCloseTaskForm(taskId).getTitleCloseTaskForm();
+        String expectedTitle = "Close a task";
+        Assert.assertEquals(actualTitle, expectedTitle, "Close project page is not opened.");
+        this.dashboardPage.clickYesButton();
+        ProjectListingPage listingPage = this.dashboardPage.openProjectListing(projectId);
+        String actualAlert = listingPage.getTextFromAlert();
+        String expectedAlert = "No tasks found.";
+        Assert.assertEquals(actualAlert, expectedAlert, "Alert with text about absent task is not exist.");
     }
 
     @AfterMethod
@@ -57,4 +60,5 @@ public class CreateTaskTests extends BaseTest {
         boolean isRemovedProject = projectApiSteps.removeProject(Integer.valueOf(projectId), USERNAME, PASSWORD);
         boolean isRemovedUser = userApiSteps.removeUser(Integer.valueOf(userId));
     }
+
 }

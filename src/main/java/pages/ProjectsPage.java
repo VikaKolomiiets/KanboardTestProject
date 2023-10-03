@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class ProjectsPage {
         return this;
     }
 
+    @Step("Chose given project on page and go on it")
     public ProjectsPage openDropDownInChosenProject(String projectId) {
         numberIcons.stream()
                 .filter(e -> e != null)
@@ -39,11 +41,7 @@ public class ProjectsPage {
         return this;
     }
 
-    public ProjectsPage clickActivityToOpenProjectActivity() {
-        this.activity.shouldBe(Condition.visible).doubleClick();
-        return this;
-    }
-
+    @Step("Open Project page by click on Configure")
     public ProjectPage clickConfigureToOpenProjectPage() {
         configure.shouldBe(Condition.visible).doubleClick();
         return new ProjectPage();
@@ -54,26 +52,17 @@ public class ProjectsPage {
         return new ListProjectPage();
     }
 
-    public boolean isContainProjectNumber1(String projectId) {
 
-        List<String> pageTexts = numberIcons.stream()
-                .filter(e -> e != null && e.text() != null)
-                .map(e -> e.getText())
-                .collect(Collectors.toList());
-        if (pageTexts == null) {
-            return false;
-        } else {
-            return pageTexts.stream().anyMatch(s -> s.contains(projectId));
-        }
-    }
-
+    @Step("Get the count of Projects, which is shown in title of Project Page ")
     public Integer getProjectsCount() {
         String elementText = projectsCount.shouldBe(Condition.visible).getText();
         String number = Arrays.stream(elementText.split("[^0-9]+")).reduce((x, y) -> x.concat(y)).get();
         return Integer.valueOf(number);
     }
 
+    @Step("Get text from Alert about No Project")
     public String getTextFromAlertNoProject() {
+
         return this.alertNoProject.shouldBe(Condition.visible).getText();
     }
 

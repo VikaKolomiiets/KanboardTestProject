@@ -4,7 +4,7 @@ import api.enums.UserRole;
 import api.steps.ProjectApiSteps;
 import api.steps.UserApiSteps;
 import api.tests.BaseTest;
-import api.utils.DataTests;
+import api.utils.AddRandomDataTests;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -14,9 +14,9 @@ import pages.DashboardPage;
 import pages.LoginPage;
 
 public class CreateProjectTests extends BaseTest {
-    private static final String USERNAME = DataTests.addUniqueSuffix("Bossy");
+    private static final String USERNAME = AddRandomDataTests.addUniqueSuffix("Bossy");
     private static final String PASSWORD = "my_Pass";
-    private static final String PROJECT_NAME =DataTests.addUniqueSuffix("Main project");
+    private static final String PROJECT_NAME = AddRandomDataTests.addUniqueSuffix("Main project");
     private static final String IDENTIFIER = "PR20011";
     private static final Integer TASK_LIMIT = 5;
     private static final String ERROR_TEXT = "The project name is required";
@@ -31,18 +31,14 @@ public class CreateProjectTests extends BaseTest {
         userId = userApiSteps.createUser(USERNAME, PASSWORD);
         boolean isManager = userApiSteps.updateUserRole(Integer.valueOf(userId), UserRole.APP_MANAGER);
         System.out.println(userId);
-        this.dashboardPage = new LoginPage()
-                .openLoginPage()
-                .setUserNameInput(USERNAME)
-                .setPasswordInput(PASSWORD)
-                .openDashBoardPageByClickOnSubmitButton();
+        this.dashboardPage = new LoginPage().openDashboardPage(USERNAME, PASSWORD);
     }
 
     @Description("Positive")
     @Test
     public void testCreateNewProject(){
         this.dashboardPage.openNewProjectForm()
-                .fillInNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
+                .fillNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
                 .clickSaveButtonNewProjectForm();
         actualTitle = this.dashboardPage.getTitleContainerName();
 
@@ -56,7 +52,7 @@ public class CreateProjectTests extends BaseTest {
     @Test
     public void testCreateCancelNewProject(){
         this.dashboardPage.openNewProjectForm()
-                .fillInNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
+                .fillNewProjectForm(PROJECT_NAME, IDENTIFIER, TASK_LIMIT)
                 .clickCancelInNewProjectForm();
         actualTitle = this.dashboardPage.getTitle().getText();
 
